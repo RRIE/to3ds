@@ -1,2 +1,2 @@
-OPTFLAGS=-O3
+OPTFLAGS=-g2
 

@@ -1,4 +1,5 @@
 # 5point library makefile
+include ../../environ.gmake
 
 LIB = lib5point.a
 
@@ -6,7 +7,7 @@ TARGET = $(LIB)
 OBJS = 5point.o poly1.o poly3.o
 
 CC=gcc
-OPTFLAGS=-O3
+#OPTFLAGS=-O3
 OTHERFLAGS=-Wall
 
 MATRIX_PATH=../matrix

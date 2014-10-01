@@ -20,7 +20,7 @@ TOP_DIR = $(shell pwd)
 
 default:
 # Make libraries
-	cd lib/opensift; $(MAKE); ln -s $(TOP_DIR)/lib/opensift/bin/siftfeat $(TOP_DIR)/bin/siftfeat;  		#Compile and link opensift
+#	cd lib/opensift; $(MAKE); ln -s $(TOP_DIR)/lib/opensift/bin/siftfeat $(TOP_DIR)/bin/siftfeat;  		#Compile and link opensift
 	cd lib/5point; $(MAKE)
 	cd lib/ann_1.1_char; $(MAKE) $(ANN_TARGET)
 	cd lib/imagelib; $(MAKE)

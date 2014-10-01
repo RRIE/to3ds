@@ -1,8 +1,9 @@
 # Makefile for sfm driver
+include ../../environ.gmake
 
 CC=gcc
 #OPTFLAGS=-O3
-OPTFLAGS=-g2
+#OPTFLAGS=-g2
 OTHERFLAGS=-Wall
 INCLUDE_PATH=-I../matrix -I../imagelib -I../sba-1.5
 

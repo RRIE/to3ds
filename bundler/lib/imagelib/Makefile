@@ -1,9 +1,10 @@
 # Makefile for imagelib
+include ../../environ.gmake
 
 GCC			= g++
 
 CC=gcc
-OPTFLAGS=-O3
+#OPTFLAGS=-O3
 OTHERFLAGS=-Wall
 
 IMAGELIB_OBJS= affine.o bmp.o canny.o color.o fileio.o filter.o fit.o	\

@@ -25,7 +25,7 @@
 #                                # (e.g., you might use 500)
 #
 BASE_PATH=$(dirname $(which $0));
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH: $BASE_PATH/bin
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$BASE_PATH/bin
 
 if [ $BASE_PATH = "TODO" ]
 then
@@ -46,8 +46,8 @@ else
     BUNDLER=$BASE_PATH/bin/bundler
 fi
 
-TO_SIFT=$BASE_PATH/bin/ToOpenSift.sh
-TO_SIFT_LIST=$BASE_PATH/bin/ToOpenSiftList.sh
+TO_SIFT=$BASE_PATH/bin/ToSift.sh
+TO_SIFT_LIST=$BASE_PATH/bin/ToSiftList.sh
 
 # Default config options
 IMAGE_DIR="."

@@ -1,7 +1,8 @@
 # Makefile for matrix library
+include ../../environ.gmake
 
 CC=gcc
-OPTFLAGS=-O3
+#OPTFLAGS=-O3
 OTHERFLAGS=-Wall -D__NO_MKL__
 
 INCLUDE_PATH = -I../imagelib -I../../include

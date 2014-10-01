@@ -1,13 +1,13 @@
 #
 # Makefile for Sparse Bundle Adjustment library & demo program
 #
-
+include ../../environ.gmake
 COMPILER=gcc
 CC=$(COMPILER)
 
 INCLUDE_FLAGS=-I../matrix
 
-OPTFLAGS=-O3
+#OPTFLAGS=-O3
 
 OBJS=sba_levmar.o sba_levmar_wrap.o sba_lapack.o sba_crsm.o sba_chkjac.o
 SRCS=sba_levmar.c sba_levmar_wrap.c sba_lapack.c sba_crsm.c sba_chkjac.c
