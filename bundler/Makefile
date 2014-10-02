@@ -17,10 +17,13 @@ ANN_TARGET = win32-g++-shared
 endif
 
 TOP_DIR = $(shell pwd)
+USE_OPENSIFT = 0
 
 default:
 # Make libraries
-#	cd lib/opensift; $(MAKE); ln -s $(TOP_DIR)/lib/opensift/bin/siftfeat $(TOP_DIR)/bin/siftfeat;  		#Compile and link opensift
+ifeq ($(USE_OPENSIFT), 1)
+	cd lib/opensift; $(MAKE); ln -s $(TOP_DIR)/lib/opensift/bin/siftfeat $(TOP_DIR)/bin/siftfeat;  		#Compile and link opensift
+endif
 	cd lib/5point; $(MAKE)
 	cd lib/ann_1.1_char; $(MAKE) $(ANN_TARGET)
 	cd lib/imagelib; $(MAKE)

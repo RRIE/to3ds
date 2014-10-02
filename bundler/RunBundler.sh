@@ -51,8 +51,15 @@ else
     BUNDLER=$BASE_PATH/bin/bundler
 fi
 
-TO_SIFT=$BASE_PATH/bin/ToSift.sh
-TO_SIFT_LIST=$BASE_PATH/bin/ToSiftList.sh
+#If opensift executable exists, use that
+if [ -f $BASE_PATH/bin/siftfeat ] 
+then
+    TO_SIFT=$BASE_PATH/bin/ToOpenSift.sh
+    TO_SIFT_LIST=$BASE_PATH/bin/ToOpenSiftList.sh
+else 
+    TO_SIFT=$BASE_PATH/bin/ToSift.sh
+    TO_SIFT_LIST=$BASE_PATH/bin/ToSiftList.sh
+fi
 
 # Default config options
 IMAGE_DIR="."
@@ -100,8 +107,15 @@ echo "[- Extracting keypoints -]"
 rm -f sift.txt
 $TO_SIFT_LIST $IMAGE_LIST > sift.txt || exit 1
 
-# Execute the SIFT commands
-sh sift.txt
+# Execute the SIFT commands, in parallel
+# $SIFT_LIMIT = 4 #Enable for parallel sift execution
+if [ -z "$(SIFT_LIMIT)" ]
+then 
+   echo "[RunBundler] Will run $SIFT_LIMIT concurrent Sift applications"
+   awk '{print "\"" $0 "\""}' sift.txt | xargs -P $SIFT_LIMIT -L 1 sh -c
+else
+   sh sift.txt 
+fi
 
 # Match images (can take a while)
 echo "[- Matching keypoints (this can take a while) -]"
