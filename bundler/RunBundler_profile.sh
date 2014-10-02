@@ -104,7 +104,7 @@ $TO_SIFT_LIST $IMAGE_LIST > sift.txt || exit 1
 
 # Execute the SIFT commands, in parallel
 # $SIFT_LIMIT = 4 #Enable for parallel sift execution
-if [ -z "$(SIFT_LIMIT)" ]
+if [[ -v $SIFT_LIMIT ]]
 then 
    echo "[RunBundler] Will run $SIFT_LIMIT concurrent Sift applications"
    awk '{print "\"" $0 "\""}' sift.txt | xargs -P $SIFT_LIMIT -L 1 sh -c
