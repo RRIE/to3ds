@@ -103,14 +103,9 @@ rm -f sift.txt
 $TO_SIFT_LIST $IMAGE_LIST > sift.txt || exit 1
 
 # Execute the SIFT commands, in parallel
-# $SIFT_LIMIT = 4 #Enable for parallel sift execution
-if [[ -v $SIFT_LIMIT ]]
-then 
-   echo "[RunBundler] Will run $SIFT_LIMIT concurrent Sift applications"
-   awk '{print "\"" $0 "\""}' sift.txt | xargs -P $SIFT_LIMIT -L 1 sh -c
-else
-   sh sift.txt 
-fi
+${SIFT_LIMIT:=1} 	#This checks if SIFT_LIMIT is set in eviroment before assigning a value
+echo "[RunBundler] Will run $SIFT_LIMIT concurrent Sift applications"
+awk '{print "\"" $0 "\""}' sift.txt | xargs -P $SIFT_LIMIT -L 1 sh -c
 
 # Match images (can take a while)
 echo "[- Matching keypoints (this can take a while) -]"
