@@ -16,6 +16,7 @@
 /* BaseApp.cpp */
 /* Base application */
 
+/*test comment*/
 #include "BaseApp.h"
 
 #include "defines.h"
