@@ -27,9 +27,9 @@ endif
 
 INCLUDE_PATH=-I../lib/imagelib -I../lib/sfm-driver -I../lib/matrix	\
 	-I../lib/5point -I../lib/sba-1.5 -I../lib/ann_1.1_char/include  \
-	-I../include
+	-I../include -I../lib/tbb/include
 
-LIB_PATH=-L../lib -L../lib/ann_1.1_char/lib -L/usr/lib/x86_64-linux-gnu
+LIB_PATH=-L../lib -L../lib/ann_1.1_char/lib -L/usr/lib/x86_64-linux-gnu -L../lib/tbb/lib
 
 BUNDLER_DEFINES=-D__NO_UI__ -D__BUNDLER__ -D__BUNDLER_DISTR__
 
@@ -41,7 +41,7 @@ BUNDLER_OBJS=BaseApp.o BundlerApp.o keys.o Register.o Epipolar.o	\
 	RelativePose.o Distortion.o TwoFrameModel.o LoadJPEG.o
 
 BUNDLER_BASE_LIBS=-limage -lsfmdrv -lsba.v1.5 -lmatrix -lz -llapack -lblas \
-	-lcblas -lminpack -lm -l5point -ljpeg -lANN_char -lgfortran
+	-lcblas -lminpack -lm -l5point -ljpeg -lANN_char -lgfortran -ltbb
 CERES_LIBS=-lceres -lcholmod -lccolamd -lcolamd -lamd -lcamd -lcxsparse \
 	-lsuitesparseconfig -lgomp -lglog -lpthread
 
@@ -74,7 +74,7 @@ $(BUNDLER): $(BUNDLER_OBJS)
 
 $(KEYMATCHFULL): KeyMatchFull.o keys2a.o
 	$(CXX) -o $@ $(CPPFLAGS) $(LIB_PATH) KeyMatchFull.o keys2a.o \
-		-lANN_char -lz
+		-lANN_char -lz -ltbb
 	cp $@ ../bin
 
 $(BUNDLE2PLY): Bundle2Ply.o
