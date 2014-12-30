@@ -79,8 +79,8 @@ $(KEYMATCHFULL): KeyMatchFull.o keys2a.o key_util.o
 		-lANN_char -lz -ltbb
 	cp $@ ../bin
 	
-$(KEYMATCHFAST): key_match_fast.o keys2a.o key_util.o
-	$(CXX) -o $@ $(CPPFLAGS) $(LIB_PATH) key_match_fast.o keys2a.o key_util.o\
+$(KEYMATCHFAST): key_match_fast.o keys2a.o key_util.o key_match.o
+	$(CXX) -o $@ $(CPPFLAGS) $(LIB_PATH) key_match_fast.o keys2a.o key_util.o key_match.o\
 		-lANN_char -lz -ltbb
 	cp $@ ../bin
 

@@ -28,6 +28,9 @@
 
 #include "keys2a.h"
 
+
+
+
 /* Create a search tree for the given set of keypoints */
 ANNkd_tree *CreateSearchTree(int num_keys, unsigned char *keys)
 {
@@ -50,7 +53,7 @@ ANNkd_tree *CreateSearchTree(int num_keys, unsigned char *keys)
     return tree;
 }
 
-std::vector<KeypointMatch> MatchKeys(int num_keys1, unsigned char *k1, 
+std::vector<KeypointMatch> MatchKeys(int num_keys1, unsigned char *k1,
                                      ANNkd_tree *tree2,
                                      double ratio, int max_pts_visit)
 {
@@ -78,8 +81,8 @@ std::vector<KeypointMatch> MatchKeys(int num_keys1, unsigned char *k1,
 }
 
 /* Compute likely matches between two sets of keypoints */
-std::vector<KeypointMatch> MatchKeys(int num_keys1, unsigned char *k1, 
-                                     int num_keys2, unsigned char *k2, 
+std::vector<KeypointMatch> MatchKeys(int num_keys1, unsigned char *k1,
+                                     int num_keys2, unsigned char *k2,
                                      double ratio, int max_pts_visit) 
 {
     annMaxPtsVisit(max_pts_visit);

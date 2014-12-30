@@ -53,7 +53,7 @@ public:
     { }
 #endif
 
- KeypointMatch(int idx1, int idx2) :
+    KeypointMatch(int idx1, int idx2) :
 	m_idx1(idx1), m_idx2(idx2)
     { }
 
@@ -68,16 +68,18 @@ typedef struct {
     float orient;
 } keypt_t;
 
+
+
 /* Create a search tree for the given set of keypoints */
 ANNkd_tree *CreateSearchTree(int num_keys, unsigned char *keys);
 
 /* Compute likely matches between two sets of keypoints */
-std::vector<KeypointMatch> MatchKeys(int num_keys1, unsigned char *k1, 
+std::vector<KeypointMatch> MatchKeys(int num_keys1, unsigned char *k1,
 				     int num_keys2, unsigned char *k2,
 				     double ratio = 0.6, 
                                      int max_pts_visit = 200);
 
-std::vector<KeypointMatch> MatchKeys(int num_keys1, unsigned char *k1, 
+std::vector<KeypointMatch> MatchKeys(int num_keys1, unsigned char *k1,
                                      ANNkd_tree *tree2,
 				     double ratio = 0.6, 
                                      int max_pts_visit = 200);
