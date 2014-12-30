@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (c) 2008-2010  Noah Snavely (snavely (at) cs.cornell.edu)
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -21,15 +21,48 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "keys2a.h"
 #include "key_util.h"
+#include "keys2a.h"
+#include "tbb/parallel_for.h"
+#include "tbb/task_scheduler_init.h"
 #include <iostream>
 #include <vector>
 
+
+struct mytask {
+  mytask(size_t n)
+    :_n(n)
+  {}
+  void operator()() {
+    for (int i=0;i<1000000;++i) {}  // Deliberately run slow
+    std::cerr << "[" << _n << "]" << "\n";
+  }
+  size_t _n;
+};
+
+void parallel_for_test(){
+	tbb::task_scheduler_init init(tbb::task_scheduler_init::default_num_threads());  // Explicit number of threads
+
+	std::vector<mytask> tasks;
+	for (int i=0;i<16;++i)
+	tasks.push_back(mytask(i));
+
+	tbb::parallel_for(
+			tbb::blocked_range<size_t>(0,tasks.size()),
+		[&tasks](const tbb::blocked_range<size_t>& r) {
+		for (size_t i=r.begin();i<r.end();++i) tasks[i]();
+		}
+	);
+}
+
 int main(int argc, char **argv) {
+	//parallel_for_test();
     char *list_in;
     char *file_out;
+
+    // Ratio Used For Matching (Replace with Macro?)
     double ratio;
+    ratio = 0.6;
 
     if (argc != 3 && argc != 4) {
         printf("Usage: %s <list.txt> <outfile> [window_radius]\n", argv[0]);
@@ -37,8 +70,12 @@ int main(int argc, char **argv) {
     }
 
     list_in = argv[1];
-    ratio = 0.6;
     file_out = argv[2];
+    FILE *f;
+    if ((f = fopen(file_out, "w")) == NULL) {
+        printf("Could not open %s for writing.\n", file_out);
+        return EXIT_FAILURE;
+    }
 
     int window_radius = -1;
     if (argc == 4) {
@@ -46,33 +83,14 @@ int main(int argc, char **argv) {
     }
 
     clock_t start = clock();
-
-    /* Read the list of files */
-    std::vector<std::string> key_files;
-    if (KEY_UTIL::read_key_file_list(list_in, key_files) != 0) return EXIT_FAILURE;
-
-    FILE *f;
-    if ((f = fopen(file_out, "w")) == NULL) {
-        printf("Could not open %s for writing.\n", file_out);
-        return EXIT_FAILURE;
-    }
-
-    int num_images = (int) key_files.size();
-
-    std::vector<unsigned char*> keys(num_images);
-    std::vector<int> num_keys(num_images);
-
-    /* Read all keys */
-    for (int i = 0; i < num_images; i++) {
-        keys[i] = NULL;
-        num_keys[i] = KEY_UTIL::read_key_file(key_files[i].c_str(), &keys[i]);
-    }
-
+    std::vector<unsigned char*> keys;
+    std::vector<int> num_keys;
+    if(KEY_UTIL::read_key_files_from_list(list_in, keys, num_keys) != 0) return EXIT_FAILURE;
     clock_t end = clock();
-    printf("[KeyMatchFull] Reading keys took %0.3fs\n", 
+    printf("[KeyMatchFull] Reading keys took %0.3fs\n",
            (end - start) / ((double) CLOCKS_PER_SEC));
 
-    for (int i = 0; i < num_images; i++) {
+    for (int i = 0; i < num_keys.size(); i++) {
         if (num_keys[i] == 0)
             continue;
 
@@ -85,7 +103,7 @@ int main(int argc, char **argv) {
 
         /* Compute the start index */
         int start_idx = 0;
-        if (window_radius > 0) 
+        if (window_radius > 0)
             start_idx = std::max(i - window_radius, 0);
 
         for (int j = start_idx; j < i; j++) {
@@ -93,7 +111,7 @@ int main(int argc, char **argv) {
                 continue;
 
             /* Compute likely matches between two sets of keypoints */
-            std::vector<KeypointMatch> matches = 
+            std::vector<KeypointMatch> matches =
                 MatchKeys(num_keys[j], keys[j], tree, ratio);
 
             int num_matches = (int) matches.size();
@@ -106,14 +124,14 @@ int main(int argc, char **argv) {
                 fprintf(f, "%d\n", (int) matches.size());
 
                 for (int i = 0; i < num_matches; i++) {
-                    fprintf(f, "%d %d\n", 
+                    fprintf(f, "%d %d\n",
                             matches[i].m_idx1, matches[i].m_idx2);
                 }
             }
         }
 
         end = clock();
-        printf("[KeyMatchFull] Matching took %0.3fs\n", 
+        printf("[KeyMatchFull] Matching took %0.3fs\n",
                (end - start) / ((double) CLOCKS_PER_SEC));
         fflush(stdout);
 
@@ -121,7 +139,7 @@ int main(int argc, char **argv) {
     }
 
     /* Free keypoints */
-    for (int i = 0; i < num_images; i++) {
+    for (int i = 0; i < keys.size(); i++) {
         if (keys[i] != NULL)
             delete [] keys[i];
     }

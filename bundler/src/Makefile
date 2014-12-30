@@ -13,12 +13,14 @@ OS=$(shell uname -o)
 ifeq ($(OS), Cygwin)
 BUNDLER=bundler.exe
 KEYMATCHFULL=KeyMatchFull.exe
+KEYMATCHFAST=key_match_fast.exe
 BUNDLE2PMVS=Bundle2PMVS.exe
 BUNDLE2VIS=Bundle2Vis.exe
 RADIALUNDISTORT=RadialUndistort.exe
 else
 BUNDLER=bundler
 KEYMATCHFULL=KeyMatchFull
+KEYMATCHFAST=key_match_fast
 BUNDLE2PLY=Bundle2Ply
 BUNDLE2PMVS=Bundle2PMVS
 BUNDLE2VIS=Bundle2Vis
@@ -62,7 +64,7 @@ endif
 
 CPPFLAGS=$(OPTFLAGS) $(OTHERFLAGS) $(INCLUDE_PATH)
 
-all: $(BUNDLER) $(KEYMATCHFULL) $(BUNDLE2PLY) $(BUNDLE2PMVS) $(BUNDLE2VIS) $(RADIALUNDISTORT)
+all: $(BUNDLER) $(KEYMATCHFULL) $(KEYMATCHFAST) $(BUNDLE2PLY) $(BUNDLE2PMVS) $(BUNDLE2VIS) $(RADIALUNDISTORT)
 
 %.o : %.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(WXFLAGS) $(BUNDLER_DEFINES) $<
@@ -72,8 +74,13 @@ $(BUNDLER): $(BUNDLER_OBJS)
 		$(BUNDLER_DEFINES) $(BUNDLER_OBJS) $(BUNDLER_LIBS)
 	cp $@ ../bin
 
-$(KEYMATCHFULL): KeyMatchFull.o keys2a.o
-	$(CXX) -o $@ $(CPPFLAGS) $(LIB_PATH) KeyMatchFull.o keys2a.o \
+$(KEYMATCHFULL): KeyMatchFull.o keys2a.o key_util.o
+	$(CXX) -o $@ $(CPPFLAGS) $(LIB_PATH) KeyMatchFull.o keys2a.o key_util.o\
+		-lANN_char -lz -ltbb
+	cp $@ ../bin
+	
+$(KEYMATCHFAST): key_match_fast.o keys2a.o key_util.o
+	$(CXX) -o $@ $(CPPFLAGS) $(LIB_PATH) key_match_fast.o keys2a.o key_util.o\
 		-lANN_char -lz -ltbb
 	cp $@ ../bin
 
