@@ -39,10 +39,10 @@ OS=`uname -o`
 
 if [ $OS = "Cygwin" ]
 then
-    MATCHKEYS=$BASE_PATH/bin/KeyMatchFull.exe
+    MATCHKEYS=$BASE_PATH/bin/key_match_fast.exe
     BUNDLER=$BASE_PATH/bin/Bundler.exe
 else
-    MATCHKEYS=$BASE_PATH/bin/KeyMatchFull
+    MATCHKEYS=$BASE_PATH/bin/key_match_fast
     BUNDLER=$BASE_PATH/bin/bundler
 fi
 
@@ -98,21 +98,23 @@ then
 fi
 
 # Run the ToSift script to generate a list of SIFT commands
-echo "[- Extracting keypoints -]"
-rm -f sift.txt
-$TO_SIFT_LIST $IMAGE_LIST > sift.txt || exit 1
+#echo "[- Extracting keypoints -]"
+#rm -f sift.txt
+#$TO_SIFT_LIST $IMAGE_LIST > sift.txt || exit 1
 
 # Execute the SIFT commands, in parallel
-${SIFT_LIMIT:=1} 	#This checks if SIFT_LIMIT is set in eviroment before assigning a value
-echo "[RunBundler] Will run $SIFT_LIMIT concurrent Sift applications"
-awk '{print "\"" $0 "\""}' sift.txt | xargs -P $SIFT_LIMIT -L 1 sh -c
+#${SIFT_LIMIT:=1} 	#This checks if SIFT_LIMIT is set in eviroment before assigning a value
+#echo "[RunBundler] Will run $SIFT_LIMIT concurrent Sift applications"
+#awk '{print "\"" $0 "\""}' sift.txt | xargs -P $SIFT_LIMIT -L 1 sh -c
 
 # Match images (can take a while)
 echo "[- Matching keypoints (this can take a while) -]"
 awk '{print $1}' $IMAGE_LIST | sed 's/\.jpg$/\.key/' > list_keys.txt
 sleep 1
-echo $MATCHKEYS list_keys.txt matches.init.txt $MATCH_WINDOW_RADIUS
-$MATCHKEYS list_keys.txt matches.init.txt $MATCH_WINDOW_RADIUS
+echo $MATCHKEYSFAST list_keys.txt matches.init.txt $MATCH_WINDOW_RADIUS
+#valgrind -v $MATCHKEYS list_keys.txt matches.init.txt $MATCH_WINDOW_RADIUS 2>&1 | tee valgrind.out
+amplxe-cl -collect hotspots -- $MATCHKEYS list_keys.txt matches.init.txt $MATCH_WINDOW_RADIUS
+#$MATCHKEYS list_keys.txt matches.init.txt $MATCH_WINDOW_RADIUS
 
 # Generate the options file for running bundler 
 mkdir -p bundle
@@ -151,6 +153,8 @@ echo "--run_bundle" >> options.txt
 echo "[- Running Bundler -]"
 rm -f constraints.txt
 rm -f pairwise_scores.txt
-amplxe-cl -collect hotspots -- $BUNDLER $IMAGE_LIST --options_file options.txt > bundle/bundle.log
+#amplxe-cl -collect hotspots -- $BUNDLER $IMAGE_LIST --options_file options.txt > bundle/bundle.log
+$BUNDLER $IMAGE_LIST --options_file options.txt > bundle/bundle.log
 
 echo "[- Done -]"
+

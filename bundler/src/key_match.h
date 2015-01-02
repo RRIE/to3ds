@@ -12,11 +12,11 @@ class KEY_MATCH_RESULT
 {
 public:
 	KEY_MATCH_RESULT(int img_id1, int img_id2, std::vector<KeypointMatch> matches) :
-		m_img_id1(img_id1), m_img_id2(img_id1), m_matches(matches){}
+		m_img_id1(img_id1), m_img_id2(img_id2), m_matches(matches){}
 
 	inline void print( FILE *f)
 	{
-        fprintf(f, "%d %d\n", m_img_id2, m_img_id1);
+        fprintf(f, "%d %d\n", m_img_id1, m_img_id2);
 
         /* Write the number of matches */
         fprintf(f, "%d\n", (int) m_matches.size());

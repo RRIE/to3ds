@@ -61,9 +61,10 @@ int main(int argc, char **argv) {
     clock_t end = clock();
     printf("[KeyMatchFull] Reading keys took %0.3fs\n",  (end - start) / ((double) CLOCKS_PER_SEC));
 
-
+    start = clock();
     std::vector<KEY_MATCH_RESULT> match_results =  KEY_MATCHER::match_keys(keys, num_keys);
-
+    end = clock();
+    printf("[KeyMatchFull] Matching keys took %0.3fs\n",  (end - start) / ((double) CLOCKS_PER_SEC));
     // dump the results
     FILE *f;
     if ((f = fopen(file_out, "w")) == NULL) {

@@ -29,7 +29,7 @@ endif
 
 INCLUDE_PATH=-I../lib/imagelib -I../lib/sfm-driver -I../lib/matrix	\
 	-I../lib/5point -I../lib/sba-1.5 -I../lib/ann_1.1_char/include  \
-	-I../include -I../lib/tbb/include
+	-I../include -I../lib/tbb/include -I ../lib/flann-1.8.4/src/cpp
 
 LIB_PATH=-L../lib -L../lib/ann_1.1_char/lib -L/usr/lib/x86_64-linux-gnu -L../lib/tbb/lib
 
