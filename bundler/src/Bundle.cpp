@@ -566,6 +566,12 @@ double BundlerApp::RunSFM(int num_pts, int num_cameras, int start_camera,
 #endif
 }
 
+/******************************************************
+*******************************************************
+Primary function to optimize 
+*******************************************************
+******************************************************/
+
 double BundlerApp::RunSFM_SBA(int num_pts, int num_cameras, int start_camera,
                               bool fix_points, 
                               camera_params_t *init_camera_params,
@@ -733,7 +739,7 @@ double BundlerApp::RunSFM_SBA(int num_pts, int num_cameras, int start_camera,
                         b[0] = Vx(nz_pts[remap[pt_idx]]);
                         b[1] = Vy(nz_pts[remap[pt_idx]]);
                         b[2] = Vz(nz_pts[remap[pt_idx]]);
-
+			/* sfm_project_rd is a candidate function to be implemented in opencl */
                         sfm_project_rd(&(init_camera_params[i]), K, 
                             init_camera_params[i].k,
                             init_camera_params[i].R, dt, b, pr, 
