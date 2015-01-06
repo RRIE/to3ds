@@ -257,6 +257,7 @@ $SCALE=1.0;
      "Panasonic DMC-LZ2"                => 5.76,   # 1/2.5"
      "Panasonic DMC-TZ1"                => 5.75,   # 1/2.5"
      "Panasonic DMC-TZ3"                => 5.68,   # 1/2.35"
+     "Panasonic DMC-ZS20"               => 6.17,   # 1/2.3"
      "PENTAX Corporation  PENTAX *ist DL"   => 23.5,
      "PENTAX Corporation  PENTAX *ist DS2"   => 23.5,
      "PENTAX Corporation  PENTAX *ist DS"   => 23.5,
