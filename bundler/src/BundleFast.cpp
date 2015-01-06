@@ -33,6 +33,14 @@
 						* adjustment */
 #define INIT_REPROJECTION_ERROR 16.0 /* 6.0 */ /* 8.0 */
 
+/******************************************************
+*******************************************************
+This is the function that is called by the bundler app.
+Most of the work is done through calls to RunSFM, with
+the rest comprising pre/post processing of the data.
+*******************************************************
+******************************************************/
+
 /* Quickly compute pose of all cameras */
 void BundlerApp::BundleAdjustFast() 
 {

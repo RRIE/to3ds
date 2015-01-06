@@ -513,6 +513,8 @@ static void sfm_project_point2_fisheye_mot(int j, int i, double *aj,
     sfm_project_point2_fisheye(j, i, aj, b, xij, adata);
 }
 
+/* Default projection function used */
+
 static void sfm_project_point3(int j, int i, double *aj, double *bi, 
 			       double *xij, void *adata)
 {
@@ -830,6 +832,7 @@ void run_sfm(int num_pts, int num_cameras, int ncons,
 #ifdef SBA_V121
     if (fix_points == 0) {
         if (optimize_for_fisheye == 0) {
+
             sba_motstr_levmar(num_pts, num_cameras, ncons, 
                               vmask, params, cnp, 3, projections, NULL, 2, 
                               //remove NULL in prev line for sba v1.2.1
