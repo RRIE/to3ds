@@ -39,6 +39,8 @@ std::vector<KEY_MATCH_RESULT> KEY_MATCHER::match_keys(std::vector<unsigned char*
 			// set up the index that will be queried
 			flann::Matrix<unsigned char> key_points( keys[i], num_keys[i], 128);
 			flann::Index < flann::L2<unsigned char>> key_index(key_points,  flann::KDTreeIndexParams(1));
+			//flann::Index < flann::L2<unsigned char>> key_index(key_points,  flann::LshIndexParams(1,20,2));
+			//flann::Index < flann::L2<unsigned char>> key_index(key_points,  flann::AutotunedIndexParams(0.6,0.01,0,0.1));
 			key_index.buildIndex();
 
 			// Compute the start index for inner loop
@@ -62,7 +64,7 @@ std::vector<KEY_MATCH_RESULT> KEY_MATCHER::match_keys(std::vector<unsigned char*
 
 				// search
 
-				key_index.knnSearch(query, indices, dists, nn, flann::SearchParams(16));
+				key_index.knnSearch(query, indices, dists, nn, flann::SearchParams(32));
 				std::vector<KeypointMatch> matches;
 
 				for( int k = 0; k < query.rows; k++)
