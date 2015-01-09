@@ -29,6 +29,7 @@ $SCALE=1.0;
 
 %ccd_widths = (
      "Asahi Optical Co.,Ltd.  PENTAX Optio330RS" => 7.176, # 1/1.8"
+     "Canon Canon PowerShot ELPH 110 HS"	=> 6.17, # 1/2.3" 
      "Canon Canon DIGITAL IXUS 400"     => 7.176,  # 1/1.8"
      "Canon Canon DIGITAL IXUS 40"      => 5.76,   # 1/2.5"
      "Canon Canon DIGITAL IXUS 430"     => 7.176,  # 1/1.8"

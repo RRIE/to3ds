@@ -24,7 +24,7 @@
 #                                # will definitely attempt to add a camera
 #                                # (e.g., you might use 500)
 #
-BASE_PATH=$(dirname $(which $0));
+BASE_PATH=$(dirname $0);
 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$BASE_PATH/bin
 
 if [ $BASE_PATH = "TODO" ]
