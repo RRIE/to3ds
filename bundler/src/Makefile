@@ -17,6 +17,7 @@ KEYMATCHFAST=key_match_fast.exe
 BUNDLE2PMVS=Bundle2PMVS.exe
 BUNDLE2VIS=Bundle2Vis.exe
 RADIALUNDISTORT=RadialUndistort.exe
+OPENCLTEST=opencl_test.exe
 else
 BUNDLER=bundler
 KEYMATCHFULL=KeyMatchFull
@@ -25,6 +26,7 @@ BUNDLE2PLY=Bundle2Ply
 BUNDLE2PMVS=Bundle2PMVS
 BUNDLE2VIS=Bundle2Vis
 RADIALUNDISTORT=RadialUndistort
+OPENCLTEST=opencl_demo
 endif
 
 INCLUDE_PATH=-I../lib/imagelib -I../lib/sfm-driver -I../lib/matrix	\
@@ -64,7 +66,7 @@ endif
 
 CPPFLAGS=$(OPTFLAGS) $(OTHERFLAGS) $(INCLUDE_PATH)
 
-all: $(BUNDLER) $(KEYMATCHFULL) $(KEYMATCHFAST) $(BUNDLE2PLY) $(BUNDLE2PMVS) $(BUNDLE2VIS) $(RADIALUNDISTORT)
+all: $(BUNDLER) $(KEYMATCHFULL) $(KEYMATCHFAST) $(BUNDLE2PLY) $(BUNDLE2PMVS) $(BUNDLE2VIS) $(RADIALUNDISTORT) $(OPENCLTEST)
 
 %.o : %.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(WXFLAGS) $(BUNDLER_DEFINES) $<
@@ -105,6 +107,12 @@ $(RADIALUNDISTORT): RadialUndistort.o LoadJPEG.o
 		-lminpack -ljpeg
 	cp $@ ../bin
 
+$(OPENCLTEST): opencl_demo.o
+	$(CXX) -o $@ $(CPPFLAGS) $(LIB_PATH) opencl_demo.o \
+		-lOpenCL
+	cp $@ ../bin
+
 clean:
 	rm -f *.o *~ $(BUNDLER) $(KEYMATCHFULL) $(BUNDLE2PMVS) \
-		$(BUNDLE2VIS) $(RADIALUNDISTORT) $(BUNDLE2PLY)
+			$(BUNDLE2VIS) $(RADIALUNDISTORT) $(BUNDLE2PLY) \
+			$(OPENCLTEST)
