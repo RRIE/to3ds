@@ -1,0 +1,1991 @@
+[sba_motstr_levmar_x] computing derivs took 0.000s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.000s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.000s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.000s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.010s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.000s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.000s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.000s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.000s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.000s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.010s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.000s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.000s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.000s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.000s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] initialization took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.010s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing derivs took 0.010s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.010s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.010s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.010s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.010s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.010s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.010s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.010s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.010s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.010s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing derivs took 0.010s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.010s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.010s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.010s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.010s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.010s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.010s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.020s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.020s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.020s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.010s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.010s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.010s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.010s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.010s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] initialization took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.010s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.010s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.010s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.010s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.010s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.010s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.010s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.020s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.010s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.010s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.010s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.010s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.010s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.020s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.010s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.020s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.010s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.010s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.020s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.010s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.010s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.010s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.010s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.010s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.010s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.010s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.000s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.010s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] initialization took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.020s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.030s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.010s
+[sba_motstr_levmar_x] computing S and e_j took 0.010s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.010s
+[sba_motstr_levmar_x] initialization took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.030s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.030s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing derivs took 0.030s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.010s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.030s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing derivs took 0.030s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.030s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing derivs took 0.030s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.010s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.030s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.010s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.030s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.010s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.010s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] initialization took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.030s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.030s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.010s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.010s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing derivs took 0.030s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.010s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] initialization took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.030s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.010s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.010s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.010s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.010s
+[sba_motstr_levmar_x] computing S and e_j took 0.020s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.010s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] initialization took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.030s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.010s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.010s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.010s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.010s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] initialization took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.030s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.010s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.010s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.010s
+[sba_motstr_levmar_x] computing S and e_j took 0.030s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.010s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] initialization took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.010s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.010s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.010s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.010s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.010s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.010s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.010s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] initialization took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.010s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.010s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.010s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.010s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.010s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.010s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.010s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] initialization took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.010s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.010s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] initialization took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.040s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.010s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.010s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.010s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.010s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.010s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.010s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing derivs took 0.050s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.010s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.010s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.010s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing derivs took 0.060s
+[sba_motstr_levmar_x] computing A and B took 0.000s
+[sba_motstr_levmar_x] computing U took 0.000s
+[sba_motstr_levmar_x] computing V took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.010s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.010s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.010s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.010s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.000s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.050s
+[sba_motstr_levmar_x] solving linear system took 0.000s
+[sba_motstr_levmar_x] computing db_i's took 0.000s
+[sba_motstr_levmar_x] fn eval took 0.010s
+[sba_motstr_levmar_x] computing damping factor took 0.000s
+[sba_motstr_levmar_x] computing S and e_j took 0.040s
+[sba_motstr_levmar_x] solving linear system took 0.010s
+[sba_motstr_levmar_x] computing db_i's took 0.000s

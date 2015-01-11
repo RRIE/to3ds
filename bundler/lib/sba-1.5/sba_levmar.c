@@ -46,7 +46,7 @@
 #define MAT_STORAGE       COLUMN_MAJOR
 
 
-// #define TIMINGS
+#define TIMINGS
 
 #ifdef TIMINGS
 #include <time.h>
