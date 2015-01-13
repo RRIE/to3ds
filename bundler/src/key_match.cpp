@@ -64,7 +64,7 @@ std::vector<KEY_MATCH_RESULT> KEY_MATCHER::match_keys(std::vector<unsigned char*
 
 				// search
 
-				key_index.knnSearch(query, indices, dists, nn, flann::SearchParams(32));
+				key_index.knnSearch(query, indices, dists, nn, flann::SearchParams(16));
 				std::vector<KeypointMatch> matches;
 
 				for( int k = 0; k < query.rows; k++)
