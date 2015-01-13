@@ -160,6 +160,9 @@ static void sba_motstr_Qs_jac(double *p, struct sba_crsm *idxij, int *rcidxs, in
  * NOTE: This function is provided mainly for illustration purposes; in case that execution time is a concern,
  * the jacobian should be computed analytically
  */
+
+/* This is the default jacobian function that is used in sba_motstr_levmar_x to compute the derivatives */
+
 static void sba_motstr_Qs_fdjac(
     double *p,                /* I: current parameter estimate, (m*cnp+n*pnp)x1 */
     struct sba_crsm *idxij,   /* I: sparse matrix containing the location of x_ij in hx */

@@ -46,7 +46,7 @@
 #define MAT_STORAGE       COLUMN_MAJOR
 
 
-// #define TIMINGS
+#define TIMINGS
 
 #ifdef TIMINGS
 #include <time.h>
@@ -1192,6 +1192,9 @@ int sba_motstr_levmar_x(
                  * involving S_jk and e_j.
                  * Recall that W_ij is cnp x pnp and (V*_i) is pnp x pnp
                  */
+
+		clock_t temp_start = clock();		
+
                 for(i=0; i<nnz; ++i){
                     /* set ptr3 to point to (V*_i)^-1, actual row number in rcsubs[i] */
                     ptr3=V + rcsubs[i]*Vsz;
@@ -1215,6 +1218,11 @@ int sba_motstr_levmar_x(
                     }
                 }
 
+		clock_t temp_end = clock();
+		printf("[sba_motstr_levmar_x] computing Y_ij took %0.4fs\n", 
+                   (temp_end - temp_start) / (float) CLOCKS_PER_SEC);
+
+		temp_start = clock();	
                 /* compute the UPPER TRIANGULAR PART of S */
                 for(k=j; k<m; ++k){ // j>=mcon
                     /* compute \sum_i Y_ij W_ik^T in YWt. Note that
@@ -1300,6 +1308,10 @@ int sba_motstr_levmar_x(
 #endif
                     }
                 }
+		temp_end = clock();
+		printf("[sba_motstr_levmar_x] computing upper triangular took %0.4fs\n", 
+                   (temp_end - temp_start) / (float) CLOCKS_PER_SEC);
+
 
                 /* copy the LOWER TRIANGULAR PART of S from the upper one */
                 for(k=mcon; k<j; ++k){
