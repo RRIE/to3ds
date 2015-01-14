@@ -47,6 +47,7 @@
 
 
 #define TIMINGS
+#define TEST_VECTOR
 
 #ifdef TIMINGS
 #include <time.h>
@@ -110,6 +111,20 @@ static double sba_mean_repr_error(int n, int mnp, double *x, double *hx, struct 
 
     return err/((double)(nprojs));
 }
+
+#ifdef TEST_VECTOR
+/* Prints array of integers to file fp, up to the max element */
+void array_to_file(FILE *fp, int max, int *array)
+{
+	int i;
+	for(i = 0; i < max; ++i)
+	{
+		fprintf(fp, "%d\t", array[i]);
+	}
+	fprintf(fp, "\n");
+	return;
+}
+#endif
 
 /* print the solution in p using sba's text format. If cnp/pnp==0 only points/cameras are printed */
 static void sba_print_sol(int n, int m, double *p, int cnp, int pnp, double *x, int mnp, struct sba_crsm *idxij, int *rcidxs, int *rcsubs)
@@ -1179,6 +1194,32 @@ int sba_motstr_levmar_x(
             start = clock();
 #endif
 
+	    #ifdef TEST_VECTOR
+	    /* Y_ij File pointers */
+	    FILE *info_y, *in_file_y, *out_file_y;
+	    info_y = fopen("yij_info.txt", "w+");
+	    in_file_y = fopen("yij_input.txt", "w+");
+	    out_file_y = fopen("yij_output.txt", "w+");
+
+
+	    /* Upper Triangular File pointers */
+	//    FILE *info_t, *in_file_t, *out_file_t;
+	//    info_t = fopen("upper_triangular_info.txt", "w+");
+	//    in_file_t = fopen("upper_triangular_input.txt", "w+");
+	//    out_file_t = fopen("upper_triangular_output.txt", "w+");
+
+	    /* Adding information on formatting of test vector file inputs */
+	    fprintf(info_y, "Input Formatting\n");
+	    fprintf(info_y, "nnz\ncnp\npnp\n");
+	    fprintf(info_y, "Scalars: V\nVsz\nYj\nYsz\nW\nWsz\n");
+            fprintf(info_y, "Vectors: rcsubs\trcidxs\n");
+	    fprintf(info_y, "rcidxs[i]\tidxij.val[rcidxs[i]]\n");
+	    fprintf(info_y, "DONE_INPUT\n");
+	    /* Adding information on formatting of test vector file outputs */
+	    fprintf(info_y, "ptr1_array\n");
+	    fprintf(info_y, "DONE_OUTPUT\n");
+	    #endif
+
             for(j=mcon; j<m; ++j){
                 int mmconxUsz=mmcon*Usz;
 
@@ -1192,9 +1233,24 @@ int sba_motstr_levmar_x(
                  * involving S_jk and e_j.
                  * Recall that W_ij is cnp x pnp and (V*_i) is pnp x pnp
                  */
+		#ifdef TEST_VECTOR
+
+		/* Printing input vectors to file */
+		fprintf(in_file_y, "%d\n%d\n%d\n", nnz, cnp, pnp);
+		fprintf(in_file_y, "%p\n%d\n%p\n%d\n%p\n%d\n", V, Vsz, Yj, Ysz, W, Wsz);
+		array_to_file(in_file_y, nnz, rcsubs);
+		array_to_file(in_file_y, nnz, rcidxs);
+		
+		for(i = 0; i < nnz; ++i)
+		{
+			fprintf(in_file_y, "%d\t%d\n", rcidxs[i], idxij.val[rcidxs[i]]);
+		}
+		fprintf(in_file_y, "DONE_INPUT\n");
+
+		#endif
 
 		clock_t temp_start = clock();		
-
+		
                 for(i=0; i<nnz; ++i){
                     /* set ptr3 to point to (V*_i)^-1, actual row number in rcsubs[i] */
                     ptr3=V + rcsubs[i]*Vsz;
@@ -1217,10 +1273,43 @@ int sba_motstr_levmar_x(
                         }
                     }
                 }
-
+		
 		clock_t temp_end = clock();
 		printf("[sba_motstr_levmar_x] computing Y_ij took %0.4fs\n", 
                    (temp_end - temp_start) / (float) CLOCKS_PER_SEC);
+		
+		#ifdef TEST_VECTOR
+		double *temp_ptr3, *temp_ptr1, *temp_ptr2, *temp_ptr4;
+		/* Printing output vectors to file */
+
+		double temp_sum;
+		for(i = 0; i < nnz; ++i)
+		{
+			/* set ptr3 to point to (V*_i)^-1, actual row number in rcsubs[i] */
+                    temp_ptr3=V + rcsubs[i]*Vsz;
+
+                    /* set ptr1 to point to Y_ij, actual row number in rcsubs[i] */
+                    temp_ptr1=Yj + i*Ysz;
+                    /* set ptr2 to point to W_ij resp. */
+                    temp_ptr2=W + idxij.val[rcidxs[i]]*Wsz;
+                    /* compute W_ij (V*_i)^-1 and store it in Y_ij.
+                     * Recall that only the lower triangle of (V*_i)^-1 is stored
+                     */
+                    for(ii=0; ii<cnp; ++ii){
+                        temp_ptr4=temp_ptr2+ii*pnp;
+                        for(jj=0; jj<pnp; ++jj){
+                            for(k=0, sum=0.0; k<=jj; ++k)
+                                temp_sum+=temp_ptr4[k]*temp_ptr3[jj*pnp+k]; //ptr2[ii*pnp+k]*ptr3[jj*pnp+k];
+                            for( ; k<pnp; ++k)
+                                temp_sum+=temp_ptr4[k]*temp_ptr3[k*pnp+jj]; //ptr2[ii*pnp+k]*ptr3[k*pnp+jj];
+                            fprintf(out_file_y, "%f\t", temp_sum);
+                        }
+			fprintf(out_file_y, "\n");
+                    }
+		}
+		fprintf(out_file_y, "DONE_OUTPUT\n");
+
+		#endif
 
 		temp_start = clock();	
                 /* compute the UPPER TRIANGULAR PART of S */
