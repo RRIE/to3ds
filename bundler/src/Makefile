@@ -45,7 +45,8 @@ BUNDLER_OBJS=BaseApp.o BundlerApp.o keys.o Register.o Epipolar.o	\
 	RelativePose.o Distortion.o TwoFrameModel.o LoadJPEG.o
 
 BUNDLER_BASE_LIBS=-limage -lsfmdrv -lsba.v1.5 -lmatrix -lz -llapack -lblas \
-	-lcblas -lminpack -lm -l5point -ljpeg -lANN_char -lgfortran -ltbb
+	-lcblas -lminpack -lm -l5point -ljpeg -lANN_char -lgfortran -ltbb  \
+	-lOpenCL
 CERES_LIBS=-lceres -lcholmod -lccolamd -lcolamd -lamd -lcamd -lcxsparse \
 	-lsuitesparseconfig -lgomp -lglog -lpthread
 

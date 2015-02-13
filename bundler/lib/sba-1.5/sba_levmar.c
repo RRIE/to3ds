@@ -31,6 +31,9 @@
 
 #include "matrix.h"
 
+/*opencl include*/
+#include "sba_opencl.h"
+
 #define SBA_EPSILON       1E-12
 #define SBA_EPSILON_SQ    ( (SBA_EPSILON)*(SBA_EPSILON) )
 
@@ -632,12 +635,16 @@ int sba_motstr_levmar_x(
 
     struct fdj_data_x_ fdj_data;
     void *jac_adata;
+    /* OpenCL info struct */
+    struct opencl_info ocl_info; 
 
     /* Initialization */
 
 #ifdef TIMINGS
     clock_t start = clock();
 #endif
+    /* OpenCL GPU information */
+    ocl_info = sba_opencl_setup();
 
     mu=eab_inf=0.0; /* -Wall */
 
@@ -1192,9 +1199,9 @@ int sba_motstr_levmar_x(
 
 #ifdef TIMINGS
             start = clock();
-#endif
+#endif 
 
-	    #ifdef TEST_VECTOR
+#ifdef TEST_VECTOR
 	    /* Y_ij File pointers */
 	    FILE *info_y, *in_file_y, *out_file_y;
 	    info_y = fopen("yij_info.txt", "w+");
@@ -1218,7 +1225,7 @@ int sba_motstr_levmar_x(
 	    /* Adding information on formatting of test vector file outputs */
 	    fprintf(info_y, "ptr1_array\n");
 	    fprintf(info_y, "DONE_OUTPUT\n");
-	    #endif
+#endif
 
             for(j=mcon; j<m; ++j){
                 int mmconxUsz=mmcon*Usz;
@@ -1233,7 +1240,7 @@ int sba_motstr_levmar_x(
                  * involving S_jk and e_j.
                  * Recall that W_ij is cnp x pnp and (V*_i) is pnp x pnp
                  */
-		#ifdef TEST_VECTOR
+#ifdef TEST_VECTOR
 
 		/* Printing input vectors to file */
 		fprintf(in_file_y, "%d\n%d\n%d\n", nnz, cnp, pnp);
@@ -1247,11 +1254,11 @@ int sba_motstr_levmar_x(
 		}
 		fprintf(in_file_y, "DONE_INPUT\n");
 
-		#endif
+#endif
 
-		#ifdef TIMINGS
+#ifdef TIMINGS
 		clock_t temp_start = clock();		
-		#endif
+#endif
 
                 for(i=0; i<nnz; ++i){
                     /* set ptr3 to point to (V*_i)^-1, actual row number in rcsubs[i] */
@@ -1276,13 +1283,13 @@ int sba_motstr_levmar_x(
                     }
                 }
 		
-		#ifdef TIMINGS		
+#ifdef TIMINGS		
 		clock_t temp_end = clock();
 		printf("[sba_motstr_levmar_x] computing Y_ij took %0.4fs\n", 
                    (temp_end - temp_start) / (float) CLOCKS_PER_SEC);
-		#endif
+#endif
 
-		#ifdef TEST_VECTOR
+#ifdef TEST_VECTOR
 		double *temp_ptr3, *temp_ptr1, *temp_ptr2, *temp_ptr4;
 		/* Printing output vectors to file */
 
@@ -1313,11 +1320,11 @@ int sba_motstr_levmar_x(
 		}
 		fprintf(out_file_y, "DONE_OUTPUT\n");
 
-		#endif
+#endif
 
-		#ifdef TIMINGS
+#ifdef TIMINGS
 		temp_start = clock();
-		#endif
+#endif
 	
                 /* compute the UPPER TRIANGULAR PART of S */
                 for(k=j; k<m; ++k){ // j>=mcon
