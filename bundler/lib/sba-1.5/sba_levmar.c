@@ -646,6 +646,8 @@ int sba_motstr_levmar_x(
     /* OpenCL GPU information */
     ocl_info = sba_opencl_setup();
 
+    sba_create_kernel(&ocl_info, "SBA_Triangular_Kernel.cl", "SBA_Triangular", 0);    
+
     mu=eab_inf=0.0; /* -Wall */
 
     /* block sizes */
