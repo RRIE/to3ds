@@ -49,7 +49,8 @@
 #define MAT_STORAGE       COLUMN_MAJOR
 
 
-//#define TIMINGS
+#define TIMINGS
+//#define OPENCL
 
 #ifdef TIMINGS
 #include <time.h>
@@ -623,15 +624,23 @@ int sba_motstr_levmar_x(
     /* OpenCL info struct */
     struct opencl_info ocl_info; 
 
+    int *nnz_array;
+    int *rcsubs_array;
+    int *rcidxs_array;
+    int *l_array;
+
     /* Initialization */
 
 #ifdef TIMINGS
     clock_t start = clock();
 #endif
     /* OpenCL GPU information */
+
+#ifdef OPENCL
     ocl_info = sba_opencl_setup();
 
-    sba_create_kernel(&ocl_info, "SBA_Triangular_Kernel.cl", "SBA_Triangular", 0);    
+    sba_create_kernel(&ocl_info, "SBA_CRSM_Kernel.cl", "SBA_CRSM", 0);    
+#endif
 
     mu=eab_inf=0.0; /* -Wall */
 
@@ -683,16 +692,6 @@ int sba_motstr_levmar_x(
     }
     maxCPvis=(maxCvis>=maxPvis)? maxCvis : maxPvis;
 
-#if 0
-    /* determine the density of matrix S */
-    for(j=mcon, ii=0; j<m; ++j){
-        ++ii; /* block Sjj is surely nonzero */
-        for(k=j+1; k<m; ++k)
-            if(sba_crsm_common_row(&idxij, j, k)) ii+=2; /* blocks Sjk & Skj are nonzero */
-    }
-    printf("\nS density: %.5g\n", ((double)ii)/(mmcon*mmcon)); fflush(stdout);
-#endif
-
     /* allocate work arrays */
     /* W is big enough to hold both jac & W. Note also the extra Wsz, see the initialization of jac below for explanation */
     W=(double *)emalloc((nvis*((Wsz>=ABsz)? Wsz : ABsz) + Wsz)*sizeof(double));
@@ -708,6 +707,25 @@ int sba_motstr_levmar_x(
     Wtda=(double *)emalloc(pnp*sizeof(double));
     rcidxs=(int *)emalloc(maxCPvis*sizeof(int));
     rcsubs=(int *)emalloc(maxCPvis*sizeof(int));
+
+    /* OpenCL Larger Optimal work arrays */
+
+    rcsubs_array = (int *)malloc(sizeof(int)*maxCPvis*m);
+    rcidxs_array = (int *)malloc(sizeof(int)*maxCPvis*m);
+    l_array = (int *)malloc(sizeof(int)*maxCPvis*m*m);
+    nnz_array = (int *)malloc(sizeof(int)*m);
+    
+    /* OpenCL sizes */
+
+    size_t nnz_size = sizeof(int)*m;
+    size_t rcsubs_size = sizeof(int)*maxCPvis*m;
+    size_t rcidxs_size = sizeof(int)*maxCPvis*m;
+    size_t val_size = sizeof(int)*(2*nvis+n+1);
+    size_t l_size = sizeof(int)*maxCPvis*m*m;
+    size_t Yj_size = sizeof(double)*maxCPvis*m*Ysz;
+    size_t W_size = sizeof(double)*(nvis*((Wsz>=ABsz)? Wsz : ABsz) + Wsz);
+    size_t V_size = sizeof(double)*(n*Vsz);
+
 #ifndef SBA_DESTROY_COVS
     if(covx!=NULL) wght=(double *)emalloc(nvis*covsz*sizeof(double));
 #else
@@ -1188,10 +1206,120 @@ int sba_motstr_levmar_x(
             start = clock();
 #endif 
 
+#ifdef TIMINGS
+	    clock_t temp_start = clock();		
+#endif
+
+#ifdef OPENCL
+	    /* Setting up nnz_array and l_array */
+	    cl_int ocl_error;
+
+	    cl_mem src_rcsubs = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE, rcsubs_size, NULL, &ocl_error);
+	    cl_mem src_rcidxs = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE, rcidxs_size, NULL, &ocl_error);
+	    cl_mem src_val = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY|CL_MEM_USE_HOST_PTR, val_size, idxij.val, &ocl_error);
+	    cl_mem src_nnz_array = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE, nnz_size, NULL, &ocl_error);
+	    cl_mem src_l_array = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE, l_size, NULL, &ocl_error);
+
+	    
+	    cl_mem src_V = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY|CL_MEM_USE_HOST_PTR, V_size, V, &ocl_error);
+	    cl_mem src_Yj = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE, Yj_size, NULL, &ocl_error);
+	    cl_mem src_W = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY|CL_MEM_USE_HOST_PTR, W_size, W, &ocl_error);
+
+
+	    ocl_error = clSetKernelArg(ocl_info.kernel[0], 0, sizeof(cl_mem), &src_rcsubs);
+	    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 1, sizeof(cl_mem), &src_rcidxs);
+	    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 2, sizeof(cl_mem), &src_val);
+	    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 3, sizeof(cl_mem), &src_nnz_array);
+	    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 4, sizeof(cl_mem), &src_l_array);
+
+	    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 5, sizeof(int), &nvis);
+	    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 6, sizeof(int), &maxCPvis);
+	    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 7, sizeof(int), &(idxij.nr));
+	    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 8, sizeof(int), &m);
+
+	    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 9, sizeof(cl_mem), &src_V);
+	    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 10, sizeof(cl_mem), &src_Yj);
+	    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 11, sizeof(cl_mem), &src_W);
+
+	    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 12, sizeof(int), &cnp);
+	    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 13, sizeof(int), &pnp);
+	    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 14, sizeof(int), &Vsz);
+	    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 15, sizeof(int), &Wsz);
+	    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 16, sizeof(int), &Ysz);
+
+	    assert(ocl_error == CL_SUCCESS);
+		
+	    const size_t global_ws[3] = {m, m, maxCPvis};
+
+	    ocl_error = clEnqueueNDRangeKernel(ocl_info.queue, ocl_info.kernel[0], 3, NULL, &global_ws, NULL, 0, NULL, NULL);
+	    assert(ocl_error == CL_SUCCESS);
+
+	    double *check1 = (double *)malloc(Yj_size);
+
+	    ocl_error = clEnqueueReadBuffer(ocl_info.queue, src_nnz_array, CL_TRUE, 0, nnz_size, nnz_array, 0, NULL, NULL);
+	    ocl_error = clEnqueueReadBuffer(ocl_info.queue, src_rcsubs, CL_TRUE, 0, rcsubs_size, rcsubs_array, 0, NULL, NULL);
+	    ocl_error = clEnqueueReadBuffer(ocl_info.queue, src_rcidxs, CL_TRUE, 0, rcidxs_size, rcidxs_array, 0, NULL, NULL);
+	    ocl_error = clEnqueueReadBuffer(ocl_info.queue, src_l_array, CL_TRUE, 0, l_size, l_array, 0, NULL, NULL);
+	    ocl_error = clEnqueueReadBuffer(ocl_info.queue, src_Yj, CL_TRUE, 0, Yj_size, check1, 0, NULL, NULL);
+
+	    printf("error is %d\n", ocl_error);
+	    assert(ocl_error == CL_SUCCESS);
+
+	    clReleaseMemObject(src_rcsubs);
+	    clReleaseMemObject(src_rcidxs);
+	    clReleaseMemObject(src_val);
+	    clReleaseMemObject(src_nnz_array);
+	    clReleaseMemObject(src_l_array);
+
+	    clReleaseMemObject(src_Yj);
+	    clReleaseMemObject(src_V);
+	    clReleaseMemObject(src_W);
+
+#endif
+
+#ifdef TIMINGS		
+	    clock_t temp_end = clock();
+	    printf("[sba_motstr_levmar_x] OpenCL setting up nnz_array and l_array %0.7fs\n", 
+                (temp_end - temp_start) / (float) CLOCKS_PER_SEC);
+#endif
+
+#ifdef TIMINGS
+	    temp_start = clock();		
+#endif
+
+#ifndef OPENCL
+	    int *temp_ptr1, *temp_ptr2;
+
+	    for(j = mcon; j < m; ++j)
+	    {
+		temp_ptr1 = rcsubs_array+j*maxCPvis;
+		temp_ptr2 = rcidxs_array+j*maxCPvis;
+		nnz_array[j] = sba_crsm_col_elmidxs(&idxij, j, temp_ptr2, temp_ptr1);
+		
+		for(k = j; k < m; ++k)
+		{
+			for(i = 0; i < nnz_array[j]; ++i)
+			{
+				l_array[j*maxCPvis*m+k*maxCPvis+i] = sba_crsm_elmidx(&idxij, rcsubs_array[j*maxCPvis+i], k);
+			}
+		}
+	    }
+#endif
+
+	    /* global work space should be m*m*maxCPvis 
+	       maxCPvis corresponds to the maximum value that nnz can be */
+
+
+#ifdef TIMINGS		
+	    temp_end = clock();
+	    printf("[sba_motstr_levmar_x] setting up nnz_array and l_array took %0.4fs\n", 
+                (temp_end - temp_start) / (float) CLOCKS_PER_SEC);
+#endif
+
             for(j=mcon; j<m; ++j){
                 int mmconxUsz=mmcon*Usz;
 
-                nnz=sba_crsm_col_elmidxs(&idxij, j, rcidxs, rcsubs); /* find nonzero Y_ij, i=0...n-1 */
+                nnz=nnz_array[j];//sba_crsm_col_elmidxs(&idxij, j, rcidxs, rcsubs); /* find nonzero Y_ij, i=0...n-1 */
 
                 /* compute all Y_ij = W_ij (V*_i)^-1 for a *fixed* j.
                  * To save memory, the block matrix consisting of the Y_ij
@@ -1203,34 +1331,41 @@ int sba_motstr_levmar_x(
                  */
 
 #ifdef TIMINGS
-		clock_t temp_start = clock();		
+		temp_start = clock();		
 #endif
 
-                for(i=0; i<nnz; ++i){
-                    /* set ptr3 to point to (V*_i)^-1, actual row number in rcsubs[i] */
-                    ptr3=V + rcsubs[i]*Vsz;
+		for(k = j; k < m; ++k)
+		{
+			if(k == j)
+			{
+                		for(i=0; i<nnz; ++i){
+                    			/* set ptr3 to point to (V*_i)^-1, actual row number in rcsubs[i] */
+                    			ptr3=V + rcsubs_array[j*maxCPvis+i]*Vsz;//rcsubs[i]*Vsz;
 
-                    /* set ptr1 to point to Y_ij, actual row number in rcsubs[i] */
-                    ptr1=Yj + i*Ysz;
-                    /* set ptr2 to point to W_ij resp. */
-                    ptr2=W + idxij.val[rcidxs[i]]*Wsz;
-                    /* compute W_ij (V*_i)^-1 and store it in Y_ij.
-                     * Recall that only the lower triangle of (V*_i)^-1 is stored
-                     */
-                    for(ii=0; ii<cnp; ++ii){
-                        ptr4=ptr2+ii*pnp;
-                        for(jj=0; jj<pnp; ++jj){
-                            for(k=0, sum=0.0; k<=jj; ++k)
-                                sum+=ptr4[k]*ptr3[jj*pnp+k]; //ptr2[ii*pnp+k]*ptr3[jj*pnp+k];
-                            for( ; k<pnp; ++k)
-                                sum+=ptr4[k]*ptr3[k*pnp+jj]; //ptr2[ii*pnp+k]*ptr3[k*pnp+jj];
-                            ptr1[ii*pnp+jj]=sum;
-                        }
-                    }
-                }
+                    			/* set ptr1 to point to Y_ij, actual row number in rcsubs[i] */
+                    			ptr1=Yj + i*Ysz;
+                    			/* set ptr2 to point to W_ij resp. */
+                    			ptr2=W + idxij.val[rcidxs_array[j*maxCPvis+i]]*Wsz;
+                    			/* compute W_ij (V*_i)^-1 and store it in Y_ij.
+                     			* Recall that only the lower triangle of (V*_i)^-1 is stored
+                     			*/
+                    			for(ii=0; ii<cnp; ++ii){
+                        			ptr4=ptr2+ii*pnp;
+                        			for(jj=0; jj<pnp; ++jj){
+                            				for(l=0, sum=0.0; l<=jj; ++l)
+                                				sum+=ptr4[l]*ptr3[jj*pnp+l]; //ptr2[ii*pnp+k]*ptr3[jj*pnp+k];
+                            				for( ; l<pnp; ++l)
+                                				sum+=ptr4[l]*ptr3[l*pnp+jj]; //ptr2[ii*pnp+k]*ptr3[k*pnp+jj];
+                            				ptr1[ii*pnp+jj]=sum;
+                        			}
+                    			}
+                		}
+			}
+		}
+		/* need a barrier here in the kernel */
 		
 #ifdef TIMINGS		
-		clock_t temp_end = clock();
+		temp_end = clock();
 		printf("[sba_motstr_levmar_x] computing Y_ij took %0.4fs\n", 
                    (temp_end - temp_start) / (float) CLOCKS_PER_SEC);
 #endif
@@ -1238,8 +1373,7 @@ int sba_motstr_levmar_x(
 #ifdef TIMINGS
 		temp_start = clock();
 #endif
-	
-                /* compute the UPPER TRIANGULAR PART of S */
+		/* compute the UPPER TRIANGULAR PART of S */
                 for(k=j; k<m; ++k){ // j>=mcon
                     /* compute \sum_i Y_ij W_ik^T in YWt. Note that
                      * for an off-diagonal block defined by j, k YWt
@@ -1254,18 +1388,8 @@ int sba_motstr_levmar_x(
 
                     for(i=0; i<nnz; ++i){
                         register double *pYWt;
-
-                        /* find the min and max column indices of the elements in row i (actually rcsubs[i])
-                         * and make sure that k falls within them. This test handles W_ik's which are
-                         * certain to be zero without bothering to call sba_crsm_elmidx()
-                         */
-                        ii=idxij.colidx[idxij.rowptr[rcsubs[i]]];
-                        jj=idxij.colidx[idxij.rowptr[rcsubs[i]+1]-1];
-                        if(k<ii || k>jj) continue; /* W_ik == 0 */
-
                         /* set ptr2 to point to W_ik */
-                        l=sba_crsm_elmidxp(&idxij, rcsubs[i], k, j, rcidxs[i]);
-                        
+                        l=l_array[j*maxCPvis*m+k*maxCPvis+i];//sba_crsm_elmidxp(&idxij, rcsubs_array[j*maxCPvis+i], k, j, rcidxs_array[j*maxCPvis+i]);
                         if(l==-1) continue; /* W_ik == 0 */
 
                         ptr2=W + idxij.val[l]*Wsz;
@@ -1279,10 +1403,9 @@ int sba_motstr_levmar_x(
 
                             ptr4=ptr2;
                             for(jj=0; jj<cnp; ++jj){
-                                //ptr4=ptr2+jj*pnp;
                                 for(l=0, sum=0.0; l<pnp; ++l)
                                     sum+=ptr3[l]*ptr4[l]; 
-                                pYWt[jj]+=sum; 
+                                *(YWt+ii*cnp+jj)+=sum;//pYWt[jj]+=sum; 
                                 ptr4+=pnp;
                             }
                         }
@@ -1292,33 +1415,19 @@ int sba_motstr_levmar_x(
                      * it is preferable to store S in column major (i.e. fortran)
                      * order, so as to avoid unecessary transposing/copying.
                      */
-#if MAT_STORAGE==COLUMN_MAJOR
                     ptr2=S + (k-mcon)*mmconxUsz + (j-mcon)*cnp; // set ptr2 to point to the beginning of block j,k in S
-#else
-                    ptr2=S + (j-mcon)*mmconxUsz + (k-mcon)*cnp; // set ptr2 to point to the beginning of block j,k in S
-#endif
 		  
                     if(j!=k){ /* Kronecker */
                         for(ii=0; ii<cnp; ++ii, ptr2+=Sdim)
                             for(jj=0; jj<cnp; ++jj)
-                                ptr2[jj]=
-#if MAT_STORAGE==COLUMN_MAJOR
-                                    -YWt[jj*cnp+ii];
-#else
-                        -YWt[ii*cnp+jj];
-#endif
+                                ptr2[jj]=-YWt[jj*cnp+ii];
                     }
                     else{
                         ptr1=U + j*Usz; // set ptr1 to point to U_j
 
                         for(ii=0; ii<cnp; ++ii, ptr2+=Sdim)
                             for(jj=0; jj<cnp; ++jj)
-                                ptr2[jj]=
-#if MAT_STORAGE==COLUMN_MAJOR
-                                    ptr1[jj*cnp+ii] - YWt[jj*cnp+ii];
-#else
-                        ptr1[ii*cnp+jj] - YWt[ii*cnp+jj];
-#endif
+                                ptr2[jj]=ptr1[jj*cnp+ii] - YWt[jj*cnp+ii];
                     }
                 }
 		
@@ -1330,13 +1439,8 @@ int sba_motstr_levmar_x(
 
                 /* copy the LOWER TRIANGULAR PART of S from the upper one */
                 for(k=mcon; k<j; ++k){
-#if MAT_STORAGE==COLUMN_MAJOR
                     ptr1=S + (k-mcon)*mmconxUsz + (j-mcon)*cnp; // set ptr1 to point to the beginning of block j,k in S
                     ptr2=S + (j-mcon)*mmconxUsz + (k-mcon)*cnp; // set ptr2 to point to the beginning of block k,j in S
-#else
-                    ptr1=S + (j-mcon)*mmconxUsz + (k-mcon)*cnp; // set ptr1 to point to the beginning of block j,k in S
-                    ptr2=S + (k-mcon)*mmconxUsz + (j-mcon)*cnp; // set ptr2 to point to the beginning of block k,j in S
-#endif
                     for(ii=0; ii<cnp; ++ii, ptr1+=Sdim)
                         for(jj=0, ptr3=ptr2+ii; jj<cnp; ++jj, ptr3+=Sdim)
                             ptr1[jj]=*ptr3;
@@ -1351,7 +1455,7 @@ int sba_motstr_levmar_x(
                     ptr2=Yj + i*Ysz;
 
                     /* set ptr3 to point to eb_i */
-                    ptr3=eb + rcsubs[i]*ebsz;
+                    ptr3=eb + rcsubs_array[j*maxCPvis+i]*ebsz;
                     for(ii=0; ii<cnp; ++ii){
                         ptr4=ptr2+ii*pnp;
                         for(jj=0, sum=0.0; jj<pnp; ++jj)
@@ -1391,14 +1495,7 @@ int sba_motstr_levmar_x(
             start = clock();
 #endif
 
-	    //issolved=sba_Axb_LU(S, E+mcon*cnp, dpa+mcon*cnp, Sdim, MAT_STORAGE); linsolver=sba_Axb_LU;
             issolved=sba_Axb_Chol(S, E+mcon*cnp, dpa+mcon*cnp, Sdim, MAT_STORAGE); linsolver=sba_Axb_Chol;
-            //issolved=sba_Axb_BK(S, E+mcon*cnp, dpa+mcon*cnp, Sdim, MAT_STORAGE); linsolver=sba_Axb_BK;
-            //issolved=sba_Axb_QRnoQ(S, E+mcon*cnp, dpa+mcon*cnp, Sdim, MAT_STORAGE); linsolver=sba_Axb_QRnoQ;
-            //issolved=sba_Axb_QR(S, E+mcon*cnp, dpa+mcon*cnp, Sdim, MAT_STORAGE); linsolver=sba_Axb_QR;
-	    //issolved=sba_Axb_SVD(S, E+mcon*cnp, dpa+mcon*cnp, Sdim, MAT_STORAGE); linsolver=sba_Axb_SVD;
-	    //issolved=sba_Axb_CG(S, E+mcon*cnp, dpa+mcon*cnp, Sdim, (3*Sdim)/2, 1E-10, SBA_CG_JACOBI, MAT_STORAGE); linsolver=(PLS)sba_Axb_CG;
-
             ++nlss;
 
 	    _dblzero(dpa, mcon*cnp); /* no change for the first mcon camera params */
