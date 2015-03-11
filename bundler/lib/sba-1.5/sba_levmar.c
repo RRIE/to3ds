@@ -51,7 +51,7 @@
 
 #define TIMINGS
 #define OPENCL
-#define OPENCL_THRESHOLD 50
+#define OPENCL_THRESHOLD 0
 
 #ifdef TIMINGS
 #include <time.h>
@@ -761,34 +761,34 @@ int sba_motstr_levmar_x(
 
 	   /* OpenCL memory pinning */
     
-	    src_val = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE|CL_MEM_USE_HOST_PTR, val_size, idxij.val, &ocl_error);
+	    src_val = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY|CL_MEM_USE_HOST_PTR, val_size, idxij.val, &ocl_error);
 		   
-	    device_val = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE, val_size, NULL, &ocl_error);
-	    pinned_val = (void *)clEnqueueMapBuffer(ocl_info.queue, src_val, CL_FALSE, CL_MAP_READ|CL_MAP_WRITE, 0, val_size, 0, NULL, NULL, &ocl_error);
+	    device_val = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY, val_size, NULL, &ocl_error);
+	    pinned_val = (void *)clEnqueueMapBuffer(ocl_info.queue, src_val, CL_FALSE, CL_MAP_WRITE, 0, val_size, 0, NULL, NULL, &ocl_error);
 	    assert(ocl_error == CL_SUCCESS);
 
 	    src_eab = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY|CL_MEM_USE_HOST_PTR, eab_size, eab, &ocl_error);
 		    
-	    device_eab = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE, eab_size, NULL, &ocl_error);
-	    pinned_eab = (void *)clEnqueueMapBuffer(ocl_info.queue, src_eab, CL_FALSE, CL_MAP_READ|CL_MAP_WRITE, 0, eab_size, 0, NULL, NULL, &ocl_error);
+	    device_eab = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY, eab_size, NULL, &ocl_error);
+	    pinned_eab = (void *)clEnqueueMapBuffer(ocl_info.queue, src_eab, CL_FALSE, CL_MAP_WRITE, 0, eab_size, 0, NULL, NULL, &ocl_error);
 	    assert(ocl_error == CL_SUCCESS);
 
 	    src_V = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY|CL_MEM_USE_HOST_PTR, V_size, V, &ocl_error);
 		
-	    device_V = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE, V_size, NULL, &ocl_error);
-	    pinned_V = (void *)clEnqueueMapBuffer(ocl_info.queue, src_V, CL_FALSE, CL_MAP_READ|CL_MAP_WRITE, 0, V_size, 0, NULL, NULL, &ocl_error);
+	    device_V = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY, V_size, NULL, &ocl_error);
+	    pinned_V = (void *)clEnqueueMapBuffer(ocl_info.queue, src_V, CL_FALSE, CL_MAP_WRITE, 0, V_size, 0, NULL, NULL, &ocl_error);
 	    assert(ocl_error == CL_SUCCESS);
 
 	    src_W = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY|CL_MEM_USE_HOST_PTR, W_size, W, &ocl_error);
 		    
-	    device_W = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE, W_size, NULL, &ocl_error);
-	    pinned_W = (void *)clEnqueueMapBuffer(ocl_info.queue, src_W, CL_FALSE, CL_MAP_READ|CL_MAP_WRITE, 0, W_size, 0, NULL, NULL, &ocl_error);
+	    device_W = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY, W_size, NULL, &ocl_error);
+	    pinned_W = (void *)clEnqueueMapBuffer(ocl_info.queue, src_W, CL_FALSE, CL_MAP_WRITE, 0, W_size, 0, NULL, NULL, &ocl_error);
 	    assert(ocl_error == CL_SUCCESS);
 
 	    src_U = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY|CL_MEM_USE_HOST_PTR, U_size, U, &ocl_error);
 		    
-	    device_U = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE, U_size, NULL, &ocl_error);
-	    pinned_U = (void *)clEnqueueMapBuffer(ocl_info.queue, src_U, CL_FALSE, CL_MAP_READ|CL_MAP_WRITE, 0, U_size, 0, NULL, NULL, &ocl_error);
+	    device_U = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY, U_size, NULL, &ocl_error);
+	    pinned_U = (void *)clEnqueueMapBuffer(ocl_info.queue, src_U, CL_FALSE, CL_MAP_WRITE, 0, U_size, 0, NULL, NULL, &ocl_error);
 	    assert(ocl_error == CL_SUCCESS);
 
 	    src_Ywt = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE|CL_MEM_USE_HOST_PTR, Ywt_size, check1, &ocl_error);
@@ -1386,9 +1386,9 @@ int sba_motstr_levmar_x(
 			
 		    const size_t global_ws[3] = {m, m, maxCPvis};
 		    cl_event kernel_event;
-		    ocl_error = clEnqueueNDRangeKernel(ocl_info.queue, ocl_info.kernel[0], 3, NULL, global_ws, NULL, 0, NULL, &kernel_event);
+		    ocl_error = clEnqueueNDRangeKernel(ocl_info.queue, ocl_info.kernel[0], 3, NULL, global_ws, NULL, 0, NULL, NULL);
 		    assert(ocl_error == CL_SUCCESS);
-		    clWaitForEvents(1, &kernel_event);
+		    //clWaitForEvents(1, &kernel_event);
 
 #ifdef TIMINGS		
 		    temp_end = clock();
@@ -2271,6 +2271,15 @@ int sba_motstr_levmar_x(
 	    clReleaseMemObject(src_eab);
 	    clReleaseMemObject(src_Ywt);
 	    clReleaseMemObject(src_E);
+
+	    clReleaseMemObject(device_val);
+	    clReleaseMemObject(device_V);
+	    clReleaseMemObject(device_W);
+	    clReleaseMemObject(device_U);
+	    clReleaseMemObject(device_eab);
+	    clReleaseMemObject(device_Ywt);
+	    clReleaseMemObject(device_E);
+
 
 	    clReleaseMemObject(src_rcsubs);
 	    clReleaseMemObject(src_rcidxs);    

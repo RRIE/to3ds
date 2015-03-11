@@ -53,13 +53,10 @@ __kernel void SBA_CRSM(__global int *rcsubs_array, __global int *rcidxs_array,
 				l_val = k; //l_array[idj*maxCPvis*m+idk*maxCPvis+idi] = k;
 		}
 		l_val = -1;//l_array[idj*maxCPvis*m+idk*maxCPvis+idi] = -1;
-	}
 
 	
 /* Compute Yj */
 
-	if(idi < nnz)
-	{
 		ptr3 = V+rcsubs_array[idj*maxCPvis+idi]*Vsz;
 
 		ptr1 = Yj+idj*maxCPvis*Ysz+idi*Ysz;
@@ -78,10 +75,6 @@ __kernel void SBA_CRSM(__global int *rcsubs_array, __global int *rcidxs_array,
 				ptr1[ii*3+jj] = sum; // pnp = 3
 			}
 		}
-	}
-
-	if(idi < nnz)
-	{
 		if(l_val != -1)
 		{
 			ptr2 = W+val[l_val]*Wsz;
