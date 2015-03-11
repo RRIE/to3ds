@@ -2,6 +2,13 @@
 /* SBA OpenCL include file						     */
 /*****************************************************************************/
 
+#ifndef __sba_opencl_h__
+#define __sba_opencl_h__
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "CL/cl.h"
 
 /* struct for storing OpenCL platform/device specific information 	     */
@@ -31,3 +38,8 @@ struct opencl_info sba_opencl_setup(void);
 
 void sba_create_kernel(struct opencl_info *info, char *kernel_file, char *kernel_name, int kernel_index);
 
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __sba_opencl_h__ */
