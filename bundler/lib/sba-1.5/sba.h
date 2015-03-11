@@ -67,6 +67,8 @@ extern "C" {
  * See http://www.netlib.org/linalg/html_templates/node91.html#SECTION00931100000000000000
  */
 
+struct opencl_info;
+
 struct sba_crsm{
     int nr, nc;   /* #rows, #cols for the sparse matrix */
     int nnz;      /* number of nonzero array elements */
@@ -105,7 +107,7 @@ sba_motstr_levmar(const int n, const int m, const int mcon, char *vmask,
                   int use_constraints, camera_constraints_t *constraints, 
                   int use_point_constraints, 
                   point_constraints_t *point_constraints, 
-                  double *Vout, double *Sout, double *Uout, double *Wout);
+                  double *Vout, double *Sout, double *Uout, double *Wout, struct opencl_info ocl_info);
 
 extern int
 sba_mot_levmar(const int n, const int m, const int mcon, char *vmask, double *p, const int cnp,
@@ -135,7 +137,7 @@ sba_motstr_levmar_x(const int n, const int m, const int mcon, char *vmask, doubl
 		    point_constraints_t *point_constraints
 		    /* Constraints on camera parameters */,
                     double *Vout, double *Sout /* size cnp * cnp * m*m */,
-                    double *Uout, double *Wout /* size pnp * cnp * m*n */);
+                    double *Uout, double *Wout /* size pnp * cnp * m*n */, struct opencl_info ocl_info);
 
 extern int
 sba_mot_levmar_x(const int n, const int m, const int mcon, char *vmask, double *p, const int cnp,
@@ -172,6 +174,8 @@ extern int sba_crsm_elmidx(struct sba_crsm *sm, int i, int j);
 extern int sba_crsm_elmidxp(struct sba_crsm *sm, int i, int j, int jp, int jpidx);
 extern int sba_crsm_row_elmidxs(struct sba_crsm *sm, int i, int *vidxs, int *jidxs);
 extern int sba_crsm_col_elmidxs(struct sba_crsm *sm, int j, int *vidxs, int *iidxs);
+extern int sba_crsm_col_elmidxs_linear(struct sba_crsm *sm, int j, int *vidxs, int *iidxs);
+extern int sba_crsm_elmidx_linear(struct sba_crsm *sm, int i, int j);
 /* extern int sba_crsm_common_row(struct sba_crsm *sm, int j, int k); */
 
 #ifdef __cplusplus

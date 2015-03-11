@@ -28,6 +28,7 @@
 
 #include "BundlerApp.h"
 #include "Bundle.h"
+#include "sba_opencl.h"
 
 #define MIN_INLIERS_EST_PROJECTION 15 /* 30 */ /* This constant needs
 						* adjustment */
@@ -100,6 +101,15 @@ void BundlerApp::BundleAdjustFast()
     int curr_num_cameras, curr_num_pts;
     int pt_count;
 
+#define OPENCL
+
+#ifdef OPENCL
+    struct opencl_info ocl_info = sba_opencl_setup();
+
+    sba_create_kernel(&ocl_info, "SBA_CRSM_Kernel.cl", "SBA_CRSM", 0);    
+#endif
+
+
     if (num_init_cams == 0) {
 	BundlePickInitialPair(i_best, j_best, true);
 
@@ -127,7 +137,7 @@ void BundlerApp::BundleAdjustFast()
 	/* Run sfm for the first time */
 	double error0;
 	error0 = RunSFM(curr_num_pts, 2, 0, false,
-			cameras, points, added_order, colors, pt_views);
+			cameras, points, added_order, colors, pt_views, &ocl_info);
 
 	printf("  focal lengths: %0.3f, %0.3f\n", cameras[0].f, cameras[1].f);
 
@@ -205,7 +215,7 @@ void BundlerApp::BundleAdjustFast()
 
 	    double error1;
 	    error1 = RunSFM(curr_num_pts, 2, 0, false,
-			    cameras, points, added_order, colors, pt_views);
+			    cameras, points, added_order, colors, pt_views, &ocl_info);
 
 #if 0
 	    if (error0 < error1) {
@@ -384,7 +394,7 @@ void BundlerApp::BundleAdjustFast()
         if (!m_skip_full_bundle) {
             /* Run sfm again to update parameters */
             RunSFM(curr_num_pts, curr_num_cameras, 0, false,
-                   cameras, points, added_order, colors, pt_views);
+                   cameras, points, added_order, colors, pt_views, &ocl_info);
 
             /* Remove bad points and cameras */
             RemoveBadPointsAndCameras(curr_num_pts, curr_num_cameras + 1, 

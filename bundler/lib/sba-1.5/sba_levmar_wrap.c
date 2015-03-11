@@ -27,6 +27,7 @@
 
 #include "sba.h"
 
+#include "sba_opencl.h"
 
 #define FABS(x)           (((x)>=0)? (x) : -(x))
 
@@ -668,7 +669,7 @@ int sba_motstr_levmar(
                   int use_constraints, camera_constraints_t *constraints, 
                   int use_point_constraints, 
                   point_constraints_t *point_constraints, 
-                  double *Vout, double *Sout, double *Uout, double *Wout)
+                  double *Vout, double *Sout, double *Uout, double *Wout, struct opencl_info ocl_info)
 {
 int retval;
 struct wrap_motstr_data_ wdata;
@@ -682,7 +683,7 @@ static void (*fjac)(double *p, struct sba_crsm *idxij, int *rcidxs, int *rcsubs,
   wdata.adata=adata;
 
   fjac=(projac)? sba_motstr_Qs_jac : sba_motstr_Qs_fdjac;
-  retval=sba_motstr_levmar_x(n, m, mcon, vmask, p, cnp, pnp, x, covx, mnp, sba_motstr_Qs, fjac, &wdata, itmax, verbose, opts, info, use_constraints, constraints, use_point_constraints, point_constraints, Vout, Sout, Uout, Wout);
+  retval=sba_motstr_levmar_x(n, m, mcon, vmask, p, cnp, pnp, x, covx, mnp, sba_motstr_Qs, fjac, &wdata, itmax, verbose, opts, info, use_constraints, constraints, use_point_constraints, point_constraints, Vout, Sout, Uout, Wout, ocl_info);
 
   if(info){
     register int i;

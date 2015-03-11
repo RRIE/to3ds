@@ -29,6 +29,8 @@ extern "C" {
 #define NUM_CAMERA_PARAMS 9
 #define POLY_INVERSE_DEGREE 6
 
+struct opencl_info;
+
 typedef struct {
     double R[9];     /* Rotation */
     double t[3];     /* Translation */
@@ -83,7 +85,7 @@ void run_sfm(int num_pts, int num_cameras, int ncons,
              double eps2,
              double *Vout,
              double *Sout,
-             double *Uout, double *Wout);
+             double *Uout, double *Wout, struct opencl_info ocl_info);
 
 /* Refine the position of a single camera */
 void camera_refine(int num_points, v3_t *points, v2_t *projs, 

@@ -24,6 +24,8 @@
 
 #include "sba.h"
 
+#include "sba_opencl.h"
+
 #include "matrix.h"
 #include "vector.h"
 #include "sfm.h"
@@ -622,7 +624,7 @@ void run_sfm(int num_pts, int num_cameras, int ncons,
              double eps2,
              double *Vout, 
              double *Sout,
-             double *Uout, double *Wout
+             double *Uout, double *Wout, struct opencl_info ocl_info
              /* size num_cameras ** 2 * cnp * cnp */)
 {
     int cnp;
@@ -841,7 +843,7 @@ void run_sfm(int num_pts, int num_cameras, int ncons,
                               MAX_ITERS, VERBOSITY, opts, info,
                               use_constraints, constraints,
                               use_point_constraints,
-                              point_constraints, Vout, Sout, Uout, Wout);
+                              point_constraints, Vout, Sout, Uout, Wout, ocl_info);
         } else {
             sba_motstr_levmar(num_pts, num_cameras, ncons, 
                               vmask, params, cnp, 3, projections, NULL, 2,
@@ -850,7 +852,7 @@ void run_sfm(int num_pts, int num_cameras, int ncons,
                               MAX_ITERS, VERBOSITY, opts, info,
                               use_constraints, constraints,
                               use_point_constraints,
-                              point_constraints, Vout, Sout, Uout, Wout); 
+                              point_constraints, Vout, Sout, Uout, Wout, ocl_info); 
         }
     } else {
         if (optimize_for_fisheye == 0) {
@@ -876,7 +878,7 @@ void run_sfm(int num_pts, int num_cameras, int ncons,
 			  sfm_project_point2, NULL, (void *) (&global_params),
 			  MAX_ITERS, VERBOSITY, opts, info, 
 			  use_constraints, constraints, 
-                          Vout, Sout, Uout, Wout);
+                          Vout, Sout, Uout, Wout, ocl_info);
     } else {
 	sba_mot_levmar(num_pts, num_cameras, ncons, 
 		       vmask, params, cnp, projections, 2,

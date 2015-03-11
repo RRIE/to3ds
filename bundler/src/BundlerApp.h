@@ -372,7 +372,7 @@ public:
     double RunSFM(int num_pts, int num_cameras, int start_camera,
                   bool fix_points, camera_params_t *init_camera_params,
                   v3_t *init_pts, int *added_order, v3_t *colors,
-                  std::vector<ImageKeyVector> &pt_views, 
+                  std::vector<ImageKeyVector> &pt_views, struct opencl_info *ocl_info = NULL, 
                   int max_iter = 0, int max_iter2 = 0, 
                   int verbosity = 0, double eps2 = 1.0e-12,
                   double *S = NULL, double *U = NULL, double *V = NULL,
@@ -383,7 +383,7 @@ public:
     double RunSFM_SBA(int num_pts, int num_cameras, int start_camera,
                       bool fix_points, camera_params_t *init_camera_params,
                       v3_t *init_pts, int *added_order, v3_t *colors,
-                      std::vector<ImageKeyVector> &pt_views, 
+                      std::vector<ImageKeyVector> &pt_views, struct opencl_info *ocl_info = NULL, 
                       double eps2 = 1.0e-12,
                       double *S = NULL, double *U = NULL, double *V = NULL,
                       double *W = NULL, bool remove_outliers = true);

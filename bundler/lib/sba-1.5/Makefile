@@ -5,7 +5,7 @@ include ../../environ.gmake
 COMPILER=gcc
 CC=$(COMPILER)
 
-INCLUDE_FLAGS=-I../matrix -I../include
+INCLUDE_FLAGS=-I../matrix -I../../include
 
 #OPTFLAGS=-O3
 

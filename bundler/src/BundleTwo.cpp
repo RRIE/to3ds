@@ -482,7 +482,7 @@ double BundlerApp::RunSFMNecker(int i1, int i2,
     double error1;
     error1 = RunSFM_SBA(num_points, 2, 0, false,
                         cameras_new, points_new, added_order, 
-                        colors, pt_views,
+                        colors, pt_views, NULL,
                         threshold, NULL, NULL, NULL, NULL, true);
 
     return error1;
@@ -889,11 +889,11 @@ bool BundlerApp::BundleTwoFrame(int i1, int i2, TwoFrameModel *model,
 #ifdef USE_COLORS
     double error0 = RunSFM_SBA(pt_count, 2, 0, false,
                                cameras, points, added_order, 
-                               colors, pt_views,
+                               colors, pt_views, NULL,
                                TERM_THRESH, NULL, NULL, NULL, NULL, true);
 #else
     double error0 = RunSFM_SBA(pt_count, 2, 0, false,
-                               cameras, points, added_order, NULL, pt_views,
+                               cameras, points, added_order, NULL, pt_views, NULL,
                                TERM_THRESH, NULL, NULL, NULL, NULL, true);
 #endif
 #endif
@@ -1201,7 +1201,7 @@ bool BundlerApp::BundleTwoFrame(int i1, int i2, TwoFrameModel *model,
 
 #if 1
     error0 = RunSFM_SBA(pt_count, 2, 0, false,
-                        cameras, points, added_order, NULL, pt_views,
+                        cameras, points, added_order, NULL, pt_views, NULL,
                         TERM_THRESH, S, U, V, W, false);
 #endif
 
@@ -1476,11 +1476,11 @@ bool BundlerApp::BundleTwoFrame(int i1, int i2, TwoFrameModel *model,
 #if 1
 #ifdef USE_COLORS
     error0 = RunSFM_SBA(pt_count, 2, 0, false,
-                        cameras, points, added_order, colors, pt_views, 
+                        cameras, points, added_order, colors, pt_views, NULL, 
                         TERM_THRESH, S, U, V, W, false);
 #else
     error0 = RunSFM_SBA(pt_count, 2, 0, false,
-                        cameras, points, added_order, NULL, pt_views,
+                        cameras, points, added_order, NULL, pt_views, NULL,
                         TERM_THRESH, S, U, V, W, false);
 #endif
 #endif

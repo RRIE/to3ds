@@ -131,7 +131,6 @@ void sba_create_kernel(struct opencl_info *info, char *kernel_file, char *kernel
 
 	// Build the opencl program
 	error = clBuildProgram(program, 1, &(info->device), NULL, NULL, NULL);
-	assert(error == CL_SUCCESS);
 
 	// Get build log
 	char *build_log;
