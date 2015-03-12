@@ -106,7 +106,8 @@ void BundlerApp::BundleAdjustFast()
 #ifdef OPENCL
     struct opencl_info ocl_info = sba_opencl_setup();
 
-    sba_create_kernel(&ocl_info, "SBA_CRSM_Kernel.cl", "SBA_CRSM", 0);    
+    sba_create_kernel(&ocl_info, "SBA_CRSM_Kernel.cl", "SBA_CRSM", 0);  
+    sba_create_kernel(&ocl_info, "SBA_Jac_Kernel.cl", "SBA_Jac", 1);    
 #endif
 
 

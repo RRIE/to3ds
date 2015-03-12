@@ -33,6 +33,8 @@
 
 /*opencl include*/
 #include "sba_opencl.h"
+#include "sba_levmar.h"
+#include "sfm.h"
 
 #define SBA_EPSILON       1E-12
 #define SBA_EPSILON_SQ    ( (SBA_EPSILON)*(SBA_EPSILON) )
@@ -52,6 +54,7 @@
 #define TIMINGS
 #define OPENCL
 #define OPENCL_THRESHOLD 0
+#define OPENCL_THRESHOLD_JAC 1000
 
 #ifdef TIMINGS
 #include <time.h>
@@ -453,6 +456,11 @@ static void sba_fdjac_x(
 
 typedef int (*PLS)(double *A, double *B, double *x, int m, int iscolmaj);
 
+
+//Need to passes these to OpenCL
+extern double *global_last_ws;
+extern double *global_last_Rs;
+
 /* Bundle adjustment on camera and structure parameters 
  * using the sparse Levenberg-Marquardt as described in HZ p. 568
  *
@@ -710,6 +718,17 @@ int sba_motstr_levmar_x(
     size_t U_size = sizeof(double)*m*Usz;
     size_t E_size = sizeof(double)*m*cnp*maxCPvis;
     size_t eab_size = sizeof(double)*nvars;
+
+    /*Jacobian OpenCL sizes*/
+    size_t J_p_size 		= sizeof(double)*(m*cnp+n*pnp);
+    size_t J_val_size 		= sizeof(int)*(idxij.nnz);
+    size_t J_colidx_size	= sizeof(int)*(idxij.nnz);
+    size_t J_rowptr_size	= sizeof(int)*(idxij.nnz);
+    size_t J_last_Rs_size	= sizeof(double)*m*9;
+    size_t J_last_ws_size	= sizeof(double)*m*3;
+    size_t J_Jac_size		= sizeof(double)*nvis*ABsz;
+    size_t J_init_p_size	= sizeof(camera_params_t)*m;
+
     
     double *check1;
     double *check3; 
@@ -744,6 +763,17 @@ int sba_motstr_levmar_x(
     cl_mem src_S;
     cl_mem src_rcsubs;
     cl_mem src_rcidxs;
+
+    /*Jacobian OpenCL Memories*/
+    cl_mem src_J_p;
+    cl_mem src_J_val;
+    cl_mem src_J_colidx;
+    cl_mem src_J_rowptr;
+    cl_mem src_J_last_Rs;
+    cl_mem src_J_last_ws;
+    cl_mem src_J_init_p;
+    cl_mem src_J_Jac;
+
 
     if(m > OPENCL_THRESHOLD)
     {
@@ -959,7 +989,58 @@ int sba_motstr_levmar_x(
 #endif
 
         /* compute derivative submatrices A_ij, B_ij */
-        (*fjac)(p, &idxij, rcidxs, rcsubs, jac, jac_adata); ++njev;
+	if(m > OPENCL_THRESHOLD_JAC) { /*Launch the Jacobian Kernel*/
+	    //Create inputs
+	    src_J_p = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY|CL_MEM_COPY_HOST_PTR, J_p_size, p, &ocl_error);
+	    assert(ocl_error == CL_SUCCESS);
+
+	    src_J_val = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY|CL_MEM_COPY_HOST_PTR, J_val_size, idxij.val, &ocl_error);
+	    assert(ocl_error == CL_SUCCESS);
+
+	    src_J_colidx = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY|CL_MEM_COPY_HOST_PTR, J_colidx_size, idxij.colidx, &ocl_error);
+	    assert(ocl_error == CL_SUCCESS);
+
+	    src_J_rowptr = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY|CL_MEM_COPY_HOST_PTR, J_rowptr_size, idxij.rowptr, &ocl_error);
+	    assert(ocl_error == CL_SUCCESS);
+
+	    src_J_last_Rs = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE|CL_MEM_USE_HOST_PTR, J_last_Rs_size, global_last_Rs, &ocl_error);
+	    assert(ocl_error == CL_SUCCESS);
+
+	    src_J_last_ws = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE|CL_MEM_USE_HOST_PTR, J_last_ws_size, global_last_ws, &ocl_error);
+	    assert(ocl_error == CL_SUCCESS);
+
+	    src_J_Jac = clCreateBuffer(ocl_info.context, CL_MEM_WRITE_ONLY|CL_MEM_USE_HOST_PTR, J_Jac_size, jac, &ocl_error);
+	    assert(ocl_error == CL_SUCCESS);
+
+	    src_J_init_p = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY|CL_MEM_USE_HOST_PTR, J_init_p_size, ((sfm_global_t *)(((struct wrap_motstr_data_ *)jac_adata)->adata))->init_params, &ocl_error);
+	    assert(ocl_error == CL_SUCCESS);
+
+	    //Assign memory buffers to  
+	    ocl_error |= clSetKernelArg(ocl_info.kernel[1], 0, sizeof(cl_mem), &src_J_p);
+	    ocl_error |= clSetKernelArg(ocl_info.kernel[1], 1, sizeof(int), &idxij.nr);
+	    ocl_error |= clSetKernelArg(ocl_info.kernel[1], 2, sizeof(int), &idxij.nc);
+	    ocl_error |= clSetKernelArg(ocl_info.kernel[1], 3, sizeof(int), &idxij.nnz);
+	    ocl_error |= clSetKernelArg(ocl_info.kernel[1], 4, sizeof(cl_mem), &src_J_val);
+	    ocl_error |= clSetKernelArg(ocl_info.kernel[1], 5, sizeof(cl_mem), &src_J_colidx);
+	    ocl_error |= clSetKernelArg(ocl_info.kernel[1], 6, sizeof(cl_mem), &src_J_rowptr);
+	    ocl_error |= clSetKernelArg(ocl_info.kernel[1], 7, sizeof(cl_mem), &src_J_last_Rs);
+	    ocl_error |= clSetKernelArg(ocl_info.kernel[1], 8, sizeof(cl_mem), &src_J_last_ws);
+	    ocl_error |= clSetKernelArg(ocl_info.kernel[1], 9, sizeof(cl_mem), &src_J_Jac);
+	    ocl_error |= clSetKernelArg(ocl_info.kernel[1], 10, sizeof(cl_mem), &src_J_init_p);
+	    assert(ocl_error == CL_SUCCESS);
+
+	    printf("Got to calling the kernel\n");
+	    //Run the Kernel
+	    const size_t global_ws[1] = {m};
+	    cl_event kernel_event;
+	    ocl_error |= clEnqueueNDRangeKernel(ocl_info.queue, ocl_info.kernel[1], 1, NULL, global_ws, NULL, 0, NULL, &kernel_event);
+	    assert(ocl_error == CL_SUCCESS);
+	    clWaitForEvents(1, &kernel_event);
+	    printf("Done calling the kernel\n");
+	} else {
+            //(*fjac)(p, &idxij, rcidxs, rcsubs, jac, jac_adata); ++njev;
+	}
+	
 
 #ifdef TIMINGS
         end = clock();

@@ -52,6 +52,24 @@ typedef struct {
     double f_scale, k_scale; /* Scale on focal length, distortion params */
 } camera_params_t;
 
+
+typedef struct {
+    int num_cameras;               /* Number of cameras */
+    int num_points;                /* Number of points */
+    int num_params_per_camera;     /* Number of parameters for each camera */
+
+    int est_focal_length;          /* Should the focal length be estimated? */
+    int const_focal_length;        /* Is the focal length constant for all
+			            * cameras? */
+    int explicit_camera_centers;   /* Are the camera centers explicit? */
+    int estimate_distortion;       /* Apply undistortion? */
+    
+    camera_params_t global_params;
+    camera_params_t *init_params;  /* Initial camera parameters */
+
+    v3_t *points;
+} sfm_global_t;
+
 /* Compute an updated rotation matrix given the initial rotation (R)
  * and the correction (w) */
 void rot_update(double *R, double *w, double *Rnew);

@@ -39,23 +39,6 @@
 // #define COLIN_HACK
 #define TEST_FOCAL
 
-typedef struct {
-    int num_cameras;               /* Number of cameras */
-    int num_points;                /* Number of points */
-    int num_params_per_camera;     /* Number of parameters for each camera */
-
-    int est_focal_length;          /* Should the focal length be estimated? */
-    int const_focal_length;        /* Is the focal length constant for all
-			            * cameras? */
-    int explicit_camera_centers;   /* Are the camera centers explicit? */
-    int estimate_distortion;       /* Apply undistortion? */
-    
-    camera_params_t global_params;
-    camera_params_t *init_params;  /* Initial camera parameters */
-
-    v3_t *points;
-} sfm_global_t;
-
 static void *safe_malloc(int n, char *where)
 {
     void *mem = malloc(n);
@@ -382,8 +365,8 @@ int sfm_project_rd(camera_params_t *init, double *K, double *k,
     return in_front;
 }
 
-static double *global_last_ws = NULL;
-static double *global_last_Rs = NULL;
+double *global_last_ws = NULL;
+double *global_last_Rs = NULL;
 
 static void sfm_project_point(int j, int i, double *aj, double *bi, 
                               double *xij, void *adata)
