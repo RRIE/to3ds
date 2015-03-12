@@ -2,10 +2,8 @@ __kernel void SBA_CRSM(__global int *rcsubs_array, __global int *rcidxs_array,
 			__global int *val, uint nvis, uint maxCPvis, uint nr,
 			uint m,
 			__global double* V, __global double* Yj, __global double* W,
-			 uint Vsz, uint Wsz, uint Ysz,
-			__global double *YWt, uint YWtsz,
-			__global double *S, uint mcon, uint mmconxUsz,
-			__global double *U, uint Usz, uint Sdim,
+			__global double *YWt, __global double *S, uint mmconxUsz,
+			__global double *U, uint Sdim,
 			__global double *E, __global double *eab)
 {
 	uint idj = get_global_id(0);
@@ -16,7 +14,7 @@ __kernel void SBA_CRSM(__global int *rcsubs_array, __global int *rcidxs_array,
 	__global int *rowptr = colidx+nvis;
 	__global int *temp_ptr1, *temp_ptr2;
 
-	__global double *ptr1, *ptr2, *ptr3, *ptr4, *pYWt, *ea, *eb;
+	__global double *ptr1, *ptr2, *ptr3, *ptr4, *pYWt, *eb;
 	double sum = 0.0;
 
 	uint i, l, k, ii, jj;
@@ -57,10 +55,10 @@ __kernel void SBA_CRSM(__global int *rcsubs_array, __global int *rcidxs_array,
 	
 /* Compute Yj */
 
-		ptr3 = V+rcsubs_array[idj*maxCPvis+idi]*Vsz;
+		ptr3 = V+rcsubs_array[idj*maxCPvis+idi]*9; //pnp*pnp = 3*3 = 9
 
-		ptr1 = Yj+idj*maxCPvis*Ysz+idi*Ysz;
-		ptr2 = W+val[rcidxs_array[idj*maxCPvis+idi]]*Wsz;
+		ptr1 = Yj+idj*maxCPvis*27+idi*27; // cnp*pnp = 9*3 = 27
+		ptr2 = W+val[rcidxs_array[idj*maxCPvis+idi]]*27; // cnp*pnp = 9*3 = 27
 		#pragma unroll 9
 		for(ii = 0; ii < 9; ++ii) // cnp = 9
 		{
@@ -77,14 +75,14 @@ __kernel void SBA_CRSM(__global int *rcsubs_array, __global int *rcidxs_array,
 		}
 		if(l_val != -1)
 		{
-			ptr2 = W+val[l_val]*Wsz;
+			ptr2 = W+val[l_val]*27; // cnp*pnp = 9*3 = 27
 			for(i = 0; i < nnz; i++)
 			{
-				ptr1 = Yj+idj*maxCPvis*Ysz+i*Ysz;
-			
+				ptr1 = Yj+idj*maxCPvis*27+i*27; // cnp*pnp = 9*3 = 27
+				pYWt = YWt+idj*m*81*maxCPvis + idk*81*maxCPvis + idi*81;
 				for(ii = 0; ii < 9; ++ii) // cnp = 9
 				{
-					pYWt = YWt+idj*m*YWtsz*maxCPvis + idk*YWtsz*maxCPvis + idi*YWtsz + ii*9; // cnp = 9
+					 // cnp*cnp = 9*9 = 81, cnp = 9
 					ptr3 = ptr1+ii*3; // pnp = 3
 	
 					ptr4 = ptr2;
@@ -95,9 +93,9 @@ __kernel void SBA_CRSM(__global int *rcsubs_array, __global int *rcidxs_array,
 						for(l = 0, sum = 0.0; l < 3; ++l) // pnp = 3
 							sum+=ptr3[l]*ptr4[l];
 						if(i == 0)
-							pYWt[jj] = sum;//YWt[idj*m*YWtsz*maxCPvis+idk*YWtsz*maxCPvis+idi*YWtsz+ii*cnp+jj] = sum;
+							pYWt[ii*9+jj] = sum;//YWt[idj*m*YWtsz*maxCPvis+idk*YWtsz*maxCPvis+idi*YWtsz+ii*cnp+jj] = sum;
 						else 
-							pYWt[jj] += sum;
+							pYWt[ii*9+jj] += sum;
 						ptr4 += 3; // pnp = 3
 					}
 				}
@@ -107,7 +105,7 @@ __kernel void SBA_CRSM(__global int *rcsubs_array, __global int *rcidxs_array,
 
 /* Compute S */
 
-	ptr2 = S + (idk-mcon)*mmconxUsz + (idj - mcon)*9; // cnp = 9
+	ptr2 = S + (idk)*mmconxUsz + (idj)*9; // cnp = 9
 	ptr4 = YWt;//+idj*m*YWtsz*maxCPvis + idk*YWtsz*maxCPvis + idi*YWtsz;
 	
 	if(idj!=idk)
@@ -124,7 +122,7 @@ __kernel void SBA_CRSM(__global int *rcsubs_array, __global int *rcidxs_array,
 	}
 	else
 	{
-		ptr1 = U + idj*Usz;
+		ptr1 = U + idj*81; // Usz = cnp*cnp = 9*9 = 81
 		#pragma unroll 9
 		for(ii = 0; ii < 9; ++ii, ptr2+=Sdim) // cnp = 9
 		{
@@ -138,12 +136,11 @@ __kernel void SBA_CRSM(__global int *rcsubs_array, __global int *rcidxs_array,
 
 	/* Compute e_j=ea_j */
 	ptr1 = E + idj*9*maxCPvis+idi*9; // easz = 9
-	ea=eab; 
 	eb=eab+m*9; // cnp = 9
 	
 	if((idk == 0) && (idi < nnz))
 	{
-		ptr2 = Yj+idj*maxCPvis*Ysz+idi*Ysz;
+		ptr2 = Yj+idj*maxCPvis*27+idi*27; // Ysz = cnp*pnp = 9*3 = 27
 		ptr3 = eb+rcsubs_array[idj*maxCPvis+idi]*3; //ebsz = 3
 		#pragma unroll 9
 		for(ii = 0; ii < 9; ++ii) // cnp = 9
