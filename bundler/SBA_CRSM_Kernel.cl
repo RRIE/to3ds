@@ -126,7 +126,7 @@ __kernel void SBA_CRSM(__local int *rcsubs_array, __local int *rcidxs_array,
 /* Compute S */
 
 	ptr2 = S + (idk)*mmconxUsz + (idj)*9; // cnp = 9
-	ptr4 = YWt_test;//+idj*m*YWtsz*maxCPvis + idk*YWtsz*maxCPvis + idi*YWtsz;
+	//ptr4 = YWt_test;//+idj*m*YWtsz*maxCPvis + idk*YWtsz*maxCPvis + idi*YWtsz;
 	
 	if(idj!=idk)
 	{
@@ -136,7 +136,7 @@ __kernel void SBA_CRSM(__local int *rcsubs_array, __local int *rcidxs_array,
 			#pragma unroll 9
 			for(jj = 0; jj < 9; ++jj) // cnp = 9
 			{
-				ptr2[jj] = -ptr4[jj*9+ii]; // cnp = 9
+				ptr2[jj] = -YWt_test[jj*9+ii]; // cnp = 9
 			}
 		}
 	}
@@ -149,7 +149,7 @@ __kernel void SBA_CRSM(__local int *rcsubs_array, __local int *rcidxs_array,
 			#pragma unroll 9
 			for(jj = 0; jj < 9; ++jj) // cnp = 9
 			{
-				ptr2[jj] = ptr1[jj*9+ii]-ptr4[jj*9+ii]; // cnp = 9
+				ptr2[jj] = ptr1[jj*9+ii]-YWt_test[jj*9+ii]; // cnp = 9
 			}
 		}
 	}
