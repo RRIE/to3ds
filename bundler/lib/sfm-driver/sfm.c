@@ -21,6 +21,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <assert.h>
 
 #include "sba.h"
 
@@ -58,10 +59,14 @@ static void *safe_malloc(int n, char *where)
     return mem;
 }
 
+#define JAC_DEBUG 0
 /* Compute an updated rotation matrix given the initial rotation (R)
  * and the correction (w) */
 void rot_update(double *R, double *w, double *Rnew) 
 {
+	
+    if (JAC_DEBUG) printf("[rot_update] Calling Rotate\n");
+
     double theta, sinth, costh, n[3];
     double nx[9], nxsq[9];
     double term2[9], term3[9];
@@ -91,6 +96,8 @@ void rot_update(double *R, double *w, double *Rnew)
 
     sinth = sin(theta);
     costh = cos(theta);
+
+    if (JAC_DEBUG) printf("[rot_update] sinth=%f, costh=%f\n", sinth, costh);
 
     matrix_scale(3, 3, nx, sinth, term2);
     matrix_scale(3, 3, nxsq, 1.0 - costh, term3);
@@ -303,6 +310,7 @@ int sfm_project_rd(camera_params_t *init, double *K, double *k,
     int in_front = 1;
 
     /* Project! */
+
     if (!explicit_camera_centers) {
 	matrix_product331(R, b, b_cam);
 	b_cam[0] += tnew[0];
@@ -515,15 +523,19 @@ static void sfm_project_point3(int j, int i, double *aj, double *bi,
     /* Compute intrinsics */
     if (!globs->est_focal_length) {
 	K[0] = K[4] = globs->init_params[j].f; // globs->global_params.f;
+	if (JAC_DEBUG) assert(0);
     } else if (globs->const_focal_length) {
 	printf("Error: case of constant focal length "
 	       "has not been implemented.\n");
 	K[0] = K[4] = globs->global_params.f;
+	if (JAC_DEBUG) assert(0);
     } else {
 #ifndef TEST_FOCAL
 	K[0] = K[4] = aj[6];
+	if (JAC_DEBUG) assert(0);
 #else
 	K[0] = K[4] = aj[6] / globs->init_params[j].f_scale;
+	if (JAC_DEBUG) printf("K[0] is %f\n", K[0]);
 #endif
     }
     
@@ -533,19 +545,27 @@ static void sfm_project_point3(int j, int i, double *aj, double *bi,
 
     if (globs->est_focal_length)
         k = aj + 7;
-    else
+    else {
         k = aj + 6;
+	assert(0);
+    }
+
+    if (JAC_DEBUG) printf("W[0]=%f, W[1]=%f, W[2]=%f, last_ws[%d]=%f, last_ws[%d]=%f, last_ws[%d]=%f\n", w[0], w[1], w[2], 3*j, global_last_ws[3 * j + 0], 3*j+1, global_last_ws[3 * j + 1], 3*j+2, global_last_ws[3 * j + 2]);
 
     if (w[0] != global_last_ws[3 * j + 0] ||
 	w[1] != global_last_ws[3 * j + 1] ||
 	w[2] != global_last_ws[3 * j + 2]) {
 
 	rot_update(globs->init_params[j].R, w, global_last_Rs + 9 * j);
+
 	global_last_ws[3 * j + 0] = w[0];
 	global_last_ws[3 * j + 1] = w[1];
 	global_last_ws[3 * j + 2] = w[2];
     }
     
+
+    if (JAC_DEBUG) printf("Global_last_Rs {%f %f %f  %f %f %f %f %f %f}\n", *(global_last_Rs + 9 * j), *(global_last_Rs + 9 * j + 1), *(global_last_Rs + 9 * j +2), *(global_last_Rs + 9 * j + 3), *(global_last_Rs + 9 * j + 4), *(global_last_Rs + 9 * j + 5), *(global_last_Rs + 9 * j + 6), *(global_last_Rs + 9 * j + 7), *(global_last_Rs + 9 * j + 8));
+
     sfm_project_rd(globs->init_params + j, K, k, global_last_Rs + 9 * j, 
                    dt, bi, xij, globs->estimate_distortion, 
                    globs->explicit_camera_centers);

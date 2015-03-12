@@ -159,6 +159,7 @@ static void sba_motstr_Qs_jac(double *p, struct sba_crsm *idxij, int *rcidxs, in
 
 /* This is the default jacobian function that is used in sba_motstr_levmar_x to compute the derivatives */
 
+#define JAC_DEBUG 0
 static void sba_motstr_Qs_fdjac(
     double *p,                /* I: current parameter estimate, (m*cnp+n*pnp)x1 */
     struct sba_crsm *idxij,   /* I: sparse matrix containing the location of x_ij in hx */
@@ -191,6 +192,9 @@ static void sba_motstr_Qs_fdjac(
   pa=p; pb=p+m*cnp;
   Asz=mnp*cnp; Bsz=mnp*pnp; ABsz=Asz+Bsz;
 
+
+  printf("[sba_motstr_Qs_fdjac]cnp=%d, mnp=%d, pnp=%d\n", cnp, mnp, pnp);
+
   /* allocate memory for hxij, hxxij */
   if((hxij=malloc(2*mnp*sizeof(double)))==NULL){
     fprintf(stderr, "memory allocation request failed in sba_motstr_Qs_fdjac()!\n");
@@ -212,6 +216,7 @@ static void sba_motstr_Qs_fdjac(
 
         for(i=0; i<nnz; ++i){
           pbi=pb + rcsubs[i]*pnp; // i-th point parameters
+	  if (JAC_DEBUG) printf("[sba_motstr_Qs_fdjac] sfm_project_point3 for calculating A_ij, with %d, %d, %f, %f\n", j, rcsubs[i], *paj, *pbi);	
           (*proj)(j, rcsubs[i], paj, pbi, hxij, adata); // evaluate supplied function on current solution
 
           tmp=paj[jj];
@@ -220,8 +225,10 @@ static void sba_motstr_Qs_fdjac(
           paj[jj]=tmp; /* restore */
 
           pAB=jac + idxij->val[rcidxs[i]]*ABsz; // set pAB to point to A_ij
-          for(ii=0; ii<mnp; ++ii)
+          for(ii=0; ii<mnp; ++ii) {
             pAB[ii*cnp+jj]=(hxxij[ii]-hxij[ii])*d1;
+            if (JAC_DEBUG) printf("[sba_motstr_Qs_fdjac] wrote Jac[%d] = %f, d1 = %f\n", idxij->val[rcidxs[i]]*ABsz + ii*cnp+jj, (hxxij[ii]-hxij[ii])*d1, d1);
+	  }
         }
       }
     }
