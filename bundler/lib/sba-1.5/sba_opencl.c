@@ -148,7 +148,8 @@ void sba_create_kernel(struct opencl_info *info, char *kernel_file, char *kernel
 	free(kernel_string);
 
 	cl_kernel sba_kernel = clCreateKernel(program, kernel_name, &error);
-	printf("[sba_opencl] Error : %s\n", build_log);
+	if(error != CL_SUCCESS)
+		printf("[sba_opencl] Error is: %d\n", error);
 	
 	assert(error == CL_SUCCESS);
 
