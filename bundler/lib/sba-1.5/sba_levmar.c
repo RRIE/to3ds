@@ -990,7 +990,7 @@ int sba_motstr_levmar_x(
 	    clWaitForEvents(1, &kernel_event);
 	    printf("Done calling the kernel\n");
 	} else {
-            //(*fjac)(p, &idxij, rcidxs, rcsubs, jac, jac_adata); ++njev;
+            (*fjac)(p, &idxij, rcidxs, rcsubs, jac, jac_adata); ++njev;
 	}
 	
 
