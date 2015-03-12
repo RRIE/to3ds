@@ -697,6 +697,7 @@ int sba_motstr_levmar_x(
    
     
     /* OpenCL sizes */
+    printf("n is %d m is %d maxCPvis is %d\n", n, m, maxCPvis);
     size_t nnz_size = sizeof(int)*m;
     size_t rcsubs_size = sizeof(int)*maxCPvis*m;
     size_t rcidxs_size = sizeof(int)*maxCPvis*m;
@@ -711,26 +712,9 @@ int sba_motstr_levmar_x(
     size_t E_size = sizeof(double)*m*cnp*maxCPvis;
     size_t eab_size = sizeof(double)*nvars;
     
-    double *check1;
     double *check3; 
    
-    void *pinned_val;
-    void *pinned_eab;
-    void *pinned_V;
-    void *pinned_W;
-    void *pinned_U;
-    void *pinned_Ywt;
-    void *pinned_E;
-
     cl_int ocl_error;    
-
-    cl_mem device_val;
-    cl_mem device_eab;
-    cl_mem device_V;
-    cl_mem device_W;
-    cl_mem device_U;
-    cl_mem device_E;    
-    cl_mem device_Ywt;
 
     cl_mem src_val;
     cl_mem src_eab;
@@ -747,61 +731,29 @@ int sba_motstr_levmar_x(
 
     if(m > OPENCL_THRESHOLD)
     {
-	    
-	    check1 = (double *)malloc(Ywt_size);
 	    check3 = (double *)malloc(E_size);
-	    memset(check1, 0.0, Ywt_size);
-            memset(check3, 0.0, E_size);
 
 	    src_rcsubs = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE, rcsubs_size, NULL, &ocl_error);
+
 	    src_rcidxs = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE, rcidxs_size, NULL, &ocl_error);
+
 	    src_Yj = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE, Yj_size, NULL, &ocl_error);
+
 	    src_S = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE, S_size, NULL, &ocl_error);
-
-
-	   /* OpenCL memory pinning */
     
 	    src_val = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY|CL_MEM_USE_HOST_PTR, val_size, idxij.val, &ocl_error);
-		   
-	    device_val = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY, val_size, NULL, &ocl_error);
-	    pinned_val = (void *)clEnqueueMapBuffer(ocl_info.queue, src_val, CL_FALSE, CL_MAP_WRITE, 0, val_size, 0, NULL, NULL, &ocl_error);
-	    assert(ocl_error == CL_SUCCESS);
 
 	    src_eab = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY|CL_MEM_USE_HOST_PTR, eab_size, eab, &ocl_error);
-		    
-	    device_eab = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY, eab_size, NULL, &ocl_error);
-	    pinned_eab = (void *)clEnqueueMapBuffer(ocl_info.queue, src_eab, CL_FALSE, CL_MAP_WRITE, 0, eab_size, 0, NULL, NULL, &ocl_error);
-	    assert(ocl_error == CL_SUCCESS);
 
 	    src_V = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY|CL_MEM_USE_HOST_PTR, V_size, V, &ocl_error);
-		
-	    device_V = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY, V_size, NULL, &ocl_error);
-	    pinned_V = (void *)clEnqueueMapBuffer(ocl_info.queue, src_V, CL_FALSE, CL_MAP_WRITE, 0, V_size, 0, NULL, NULL, &ocl_error);
-	    assert(ocl_error == CL_SUCCESS);
 
 	    src_W = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY|CL_MEM_USE_HOST_PTR, W_size, W, &ocl_error);
-		    
-	    device_W = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY, W_size, NULL, &ocl_error);
-	    pinned_W = (void *)clEnqueueMapBuffer(ocl_info.queue, src_W, CL_FALSE, CL_MAP_WRITE, 0, W_size, 0, NULL, NULL, &ocl_error);
-	    assert(ocl_error == CL_SUCCESS);
 
 	    src_U = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY|CL_MEM_USE_HOST_PTR, U_size, U, &ocl_error);
 		    
-	    device_U = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY, U_size, NULL, &ocl_error);
-	    pinned_U = (void *)clEnqueueMapBuffer(ocl_info.queue, src_U, CL_FALSE, CL_MAP_WRITE, 0, U_size, 0, NULL, NULL, &ocl_error);
-	    assert(ocl_error == CL_SUCCESS);
-
-	    src_Ywt = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE|CL_MEM_USE_HOST_PTR, Ywt_size, check1, &ocl_error);
+	    src_Ywt = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE, Ywt_size, NULL, &ocl_error);
 		    
-	    device_Ywt = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE, Ywt_size, NULL, &ocl_error);
-	    pinned_Ywt = (void *)clEnqueueMapBuffer(ocl_info.queue, src_Ywt, CL_FALSE, CL_MAP_READ|CL_MAP_WRITE, 0, Ywt_size, 0, NULL, NULL, &ocl_error);
-	    assert(ocl_error == CL_SUCCESS);
-
-	    src_E = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE|CL_MEM_USE_HOST_PTR, E_size, check3, &ocl_error);
-		    
-	    device_E = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE, E_size, NULL, &ocl_error);
-	    pinned_E = (void *)clEnqueueMapBuffer(ocl_info.queue, src_E, CL_FALSE, CL_MAP_READ|CL_MAP_WRITE, 0, E_size, 0, NULL, NULL, &ocl_error);
-	    assert(ocl_error == CL_SUCCESS);
+	    src_E = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE|CL_MEM_USE_HOST_PTR, E_size, check3, &ocl_error);		    
     }
 
 
@@ -1210,15 +1162,6 @@ int sba_motstr_levmar_x(
                 ptr2[j]=ptr1[j*pnp+j];
         }
 
-        /*
-          if(!(itno%100)){
-          printf("Current estimate: ");
-          for(i=0; i<nvars; ++i)
-          printf("%.9g ", p[i]);
-          printf("-- errors %.9g %0.9g\n", eab_inf, p_eL2);
-          }
-        */
-
         /* check for convergence */
         if((eab_inf <= eps1)){
             dp_L2=0.0; /* no increment for p in this case */
@@ -1288,91 +1231,62 @@ int sba_motstr_levmar_x(
 		    start = clock();
 #endif 
 
+#ifdef OPENCL
+		    int mmconxUsz=mmcon*Usz;
+
 #ifdef TIMINGS
 		    clock_t temp_start = clock();		
 #endif
-
-#ifdef OPENCL
-		    /* Setting up nnz_array and l_array */
-
-		    
-		    int mmconxUsz=mmcon*Usz;
-
-		    
-#ifdef TIMINGS		
-		    clock_t temp_end = clock();
-		    printf("[sba_motstr_levmar_x] OpenCL non-pinned memory took %0.7fs\n", 
-			(temp_end - temp_start) / (float) CLOCKS_PER_SEC);
-#endif
-
-#ifdef TIMINGS
-		    temp_start = clock();		
-#endif
-
-		    ocl_error = clEnqueueWriteBuffer(ocl_info.queue, device_val, CL_FALSE, 0, val_size, pinned_val, 0, NULL, NULL);
+		    double pattern = 0.0;
+		    ocl_error = clEnqueueWriteBuffer(ocl_info.queue, src_val, CL_FALSE, 0, val_size, idxij.val, 0, NULL, NULL);
 		    assert(ocl_error == CL_SUCCESS);
 		    
-		    ocl_error = clEnqueueWriteBuffer(ocl_info.queue, device_V, CL_FALSE, 0, V_size, pinned_V, 0, NULL, NULL);
+		    ocl_error = clEnqueueWriteBuffer(ocl_info.queue, src_V, CL_FALSE, 0, V_size, V, 0, NULL, NULL);
 		    assert(ocl_error == CL_SUCCESS);
 		    
-		    ocl_error = clEnqueueWriteBuffer(ocl_info.queue, device_W, CL_FALSE, 0, W_size, pinned_W, 0, NULL, NULL);
+		    ocl_error = clEnqueueWriteBuffer(ocl_info.queue, src_W, CL_FALSE, 0, W_size, W, 0, NULL, NULL);
 		    assert(ocl_error == CL_SUCCESS);
 		     
-		    ocl_error = clEnqueueWriteBuffer(ocl_info.queue, device_U, CL_FALSE, 0, U_size, pinned_U, 0, NULL, NULL);
+		    ocl_error = clEnqueueWriteBuffer(ocl_info.queue, src_U, CL_FALSE, 0, U_size, U, 0, NULL, NULL);
 		    assert(ocl_error == CL_SUCCESS);
 			      
-		    ocl_error = clEnqueueWriteBuffer(ocl_info.queue, device_eab, CL_FALSE, 0, eab_size, pinned_eab, 0, NULL, NULL);
+		    ocl_error = clEnqueueWriteBuffer(ocl_info.queue, src_eab, CL_FALSE, 0, eab_size, eab, 0, NULL, NULL);
 		    assert(ocl_error == CL_SUCCESS);
 
-		    ocl_error = clEnqueueWriteBuffer(ocl_info.queue, device_E, CL_FALSE, 0, E_size, pinned_E, 0, NULL, NULL);
+		    ocl_error = clEnqueueFillBuffer(ocl_info.queue, src_E, &pattern, sizeof(double), 0, E_size, 0, NULL, NULL);//ocl_error = clEnqueueWriteBuffer(ocl_info.queue, src_E, CL_FALSE, 0, E_size, check3, 0, NULL, NULL);
 		    assert(ocl_error == CL_SUCCESS);
 			      
-		    ocl_error = clEnqueueWriteBuffer(ocl_info.queue, device_Ywt, CL_FALSE, 0, Ywt_size, pinned_Ywt, 0, NULL, NULL);
+		    ocl_error = clEnqueueFillBuffer(ocl_info.queue, src_Ywt, &pattern, sizeof(double), 0, Ywt_size, 0, NULL, NULL);//ocl_error = clEnqueueWriteBuffer(ocl_info.queue, src_Ywt, CL_FALSE, 0, Ywt_size, check1, 0, NULL, NULL);
 		    assert(ocl_error == CL_SUCCESS);
 
-		    
 #ifdef TIMINGS		
-		    temp_end = clock();
-		    printf("[sba_motstr_levmar_x] OpenCL setting pinned memory took %0.7fs\n", 
+		    clock_t temp_end = clock();
+		    printf("[sba_motstr_levmar_x] OpenCL writing data to buffers took %0.7fs\n", 
 			(temp_end - temp_start) / (float) CLOCKS_PER_SEC);
 #endif
 
 #ifdef TIMINGS
 		    temp_start = clock();		
 #endif
-
 		    ocl_error = clSetKernelArg(ocl_info.kernel[0], 0, sizeof(cl_mem), &src_rcsubs);
 		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 1, sizeof(cl_mem), &src_rcidxs);
 		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 2, sizeof(cl_mem), &src_val);
-
 		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 3, sizeof(int), &nvis);
 		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 4, sizeof(int), &maxCPvis);
 		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 5, sizeof(int), &(idxij.nr));
 		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 6, sizeof(int), &m);
-
 		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 7, sizeof(cl_mem), &src_V);
 		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 8, sizeof(cl_mem), &src_Yj);
 		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 9, sizeof(cl_mem), &src_W);
-
-		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 10, sizeof(int), &Vsz);
-		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 11, sizeof(int), &Wsz);
-		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 12, sizeof(int), &Ysz);
-
-		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 13, sizeof(cl_mem), &src_Ywt);
-		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 14, sizeof(int), &YWtsz);
-
-		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 15, sizeof(cl_mem), &src_S);
-		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 16, sizeof(int), &mcon);
-		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 17, sizeof(int), &mmconxUsz);
-		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 18, sizeof(cl_mem), &src_U);
-		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 19, sizeof(int), &Usz);
-		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 20, sizeof(int), &Sdim);
-
-		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 21, sizeof(cl_mem), &src_E);
-		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 22, sizeof(cl_mem), &src_eab);
+		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 10, sizeof(cl_mem), &src_Ywt);
+		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 11, sizeof(cl_mem), &src_S);
+		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 12, sizeof(int), &mmconxUsz);
+		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 13, sizeof(cl_mem), &src_U);
+		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 14, sizeof(int), &Sdim);
+		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 15, sizeof(cl_mem), &src_E);
+		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 16, sizeof(cl_mem), &src_eab);
 
 		    assert(ocl_error == CL_SUCCESS);
-
 #ifdef TIMINGS		
 		    temp_end = clock();
 		    printf("[sba_motstr_levmar_x] OpenCL setting kernel arguments took %0.7fs\n", 
@@ -1385,10 +1299,8 @@ int sba_motstr_levmar_x(
 
 			
 		    const size_t global_ws[3] = {m, m, maxCPvis};
-		    cl_event kernel_event;
 		    ocl_error = clEnqueueNDRangeKernel(ocl_info.queue, ocl_info.kernel[0], 3, NULL, global_ws, NULL, 0, NULL, NULL);
 		    assert(ocl_error == CL_SUCCESS);
-		    //clWaitForEvents(1, &kernel_event);
 
 #ifdef TIMINGS		
 		    temp_end = clock();
@@ -1401,8 +1313,6 @@ int sba_motstr_levmar_x(
 #endif
 		    
 		    ocl_error = clEnqueueReadBuffer(ocl_info.queue, src_S, CL_TRUE, 0, S_size, S, 0, NULL, NULL);
-		    ocl_error = clEnqueueReadBuffer(ocl_info.queue, src_E, CL_TRUE, 0, E_size, check3, 0, NULL, NULL);
-		    //printf("error is %d\n", ocl_error);
 		    assert(ocl_error == CL_SUCCESS);
 
 #ifdef TIMINGS		
@@ -2251,18 +2161,7 @@ int sba_motstr_levmar_x(
     /* OpenCL free work arrays */
     if(m > OPENCL_THRESHOLD)
     {
-	    free(check1);
 	    free(check3);
-
-	    /* OpenCL unpin memory */
-	    clEnqueueUnmapMemObject(ocl_info.queue, src_val, pinned_val, 0, NULL, NULL);
-	    clEnqueueUnmapMemObject(ocl_info.queue, src_V, pinned_V, 0, NULL, NULL);
-	    clEnqueueUnmapMemObject(ocl_info.queue, src_W, pinned_W, 0, NULL, NULL);
-	    clEnqueueUnmapMemObject(ocl_info.queue, src_U, pinned_U, 0, NULL, NULL);
-	    clEnqueueUnmapMemObject(ocl_info.queue, src_eab, pinned_eab, 0, NULL, NULL);
-	    clEnqueueUnmapMemObject(ocl_info.queue, src_Ywt, pinned_Ywt, 0, NULL, NULL);
-	    clEnqueueUnmapMemObject(ocl_info.queue, src_E, pinned_E, 0, NULL, NULL);
-
 		
 	    clReleaseMemObject(src_val);
 	    clReleaseMemObject(src_V);
@@ -2271,16 +2170,6 @@ int sba_motstr_levmar_x(
 	    clReleaseMemObject(src_eab);
 	    clReleaseMemObject(src_Ywt);
 	    clReleaseMemObject(src_E);
-
-	    clReleaseMemObject(device_val);
-	    clReleaseMemObject(device_V);
-	    clReleaseMemObject(device_W);
-	    clReleaseMemObject(device_U);
-	    clReleaseMemObject(device_eab);
-	    clReleaseMemObject(device_Ywt);
-	    clReleaseMemObject(device_E);
-
-
 	    clReleaseMemObject(src_rcsubs);
 	    clReleaseMemObject(src_rcidxs);    
 	    clReleaseMemObject(src_Yj);
