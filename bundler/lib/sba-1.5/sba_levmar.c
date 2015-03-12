@@ -53,8 +53,8 @@
 
 #define TIMINGS
 #define OPENCL
-#define OPENCL_THRESHOLD 0
-#define OPENCL_THRESHOLD_JAC 1000
+#define OPENCL_THRESHOLD 1000
+#define OPENCL_THRESHOLD_JAC 0
 
 #ifdef TIMINGS
 #include <time.h>
@@ -120,14 +120,14 @@ static double sba_mean_repr_error(int n, int mnp, double *x, double *hx, struct 
 }
 
 /* print the solution in p using sba's text format. If cnp/pnp==0 only points/cameras are printed */
-static void sba_print_sol(int n, int m, double *p, int cnp, int pnp, double *x, int mnp, struct sba_crsm *idxij, int *rcidxs, int *rcsubs)
+/*static void sba_print_sol(int n, int m, double *p, int cnp, int pnp, double *x, int mnp, struct sba_crsm *idxij, int *rcidxs, int *rcsubs)
 {
     register int i, j, ii;
     int nnz;
     double *ptr;
 
     if(cnp){
-        /* print camera parameters */
+        // print camera parameters 
         for(j=0; j<m; ++j){
             ptr=p+cnp*j;
             for(ii=0; ii<cnp; ++ii)
@@ -137,17 +137,17 @@ static void sba_print_sol(int n, int m, double *p, int cnp, int pnp, double *x, 
     }
 
     if(pnp){
-        /* 3D & 2D point parameters */
+        // 3D & 2D point parameters 
         printf("\n\n\n# X Y Z  nframes  frame0 x0 y0  frame1 x1 y1 ...\n");
         for(i=0; i<n; ++i){
             ptr=p+cnp*m+i*pnp;
             for(ii=0; ii<pnp; ++ii) // print 3D coordinates
                 printf("%g ", ptr[ii]);
 
-            nnz=sba_crsm_row_elmidxs(idxij, i, rcidxs, rcsubs); /* find nonzero x_ij, j=0...m-1 */
+            nnz=sba_crsm_row_elmidxs(idxij, i, rcidxs, rcsubs); // find nonzero x_ij, j=0...m-1 
             printf("%d ", nnz);
 
-            for(j=0; j<nnz; ++j){ /* point i projecting on camera rcsubs[j] */
+            for(j=0; j<nnz; ++j){ // point i projecting on camera rcsubs[j] 
                 ptr=x + idxij->val[rcidxs[j]]*mnp;
 
                 printf("%d ", rcsubs[j]);
@@ -157,7 +157,7 @@ static void sba_print_sol(int n, int m, double *p, int cnp, int pnp, double *x, 
             printf("\n");
         }
     }
-}
+}*/
 
 /* Compute e=x-y for two n-vectors x and y and return the squared L2 norm of e.
  * e can coincide with either x or y. 
@@ -730,7 +730,6 @@ int sba_motstr_levmar_x(
     size_t J_Jac_size		= sizeof(double)*nvis*ABsz;
     size_t J_init_p_size	= sizeof(camera_params_t)*m;
 
-    
     double *check3; 
    
     cl_int ocl_error;    
@@ -939,20 +938,19 @@ int sba_motstr_levmar_x(
 #ifdef TIMINGS
         start = clock();
 #endif
-
         /* compute derivative submatrices A_ij, B_ij */
 	if(m > OPENCL_THRESHOLD_JAC) { /*Launch the Jacobian Kernel*/
 	    //Create inputs
-	    src_J_p = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY|CL_MEM_COPY_HOST_PTR, J_p_size, p, &ocl_error);
+	    src_J_p = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY|CL_MEM_USE_HOST_PTR, J_p_size, p, &ocl_error);
 	    assert(ocl_error == CL_SUCCESS);
 
-	    src_J_val = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY|CL_MEM_COPY_HOST_PTR, J_val_size, idxij.val, &ocl_error);
+	    src_J_val = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY|CL_MEM_USE_HOST_PTR, J_val_size, idxij.val, &ocl_error);
 	    assert(ocl_error == CL_SUCCESS);
 
-	    src_J_colidx = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY|CL_MEM_COPY_HOST_PTR, J_colidx_size, idxij.colidx, &ocl_error);
+	    src_J_colidx = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY|CL_MEM_USE_HOST_PTR, J_colidx_size, idxij.colidx, &ocl_error);
 	    assert(ocl_error == CL_SUCCESS);
 
-	    src_J_rowptr = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY|CL_MEM_COPY_HOST_PTR, J_rowptr_size, idxij.rowptr, &ocl_error);
+	    src_J_rowptr = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY|CL_MEM_USE_HOST_PTR, J_rowptr_size, idxij.rowptr, &ocl_error);
 	    assert(ocl_error == CL_SUCCESS);
 
 	    src_J_last_Rs = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE|CL_MEM_USE_HOST_PTR, J_last_Rs_size, global_last_Rs, &ocl_error);
@@ -966,6 +964,29 @@ int sba_motstr_levmar_x(
 
 	    src_J_init_p = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY|CL_MEM_USE_HOST_PTR, J_init_p_size, ((sfm_global_t *)(((struct wrap_motstr_data_ *)jac_adata)->adata))->init_params, &ocl_error);
 	    assert(ocl_error == CL_SUCCESS);
+
+	    //Fill inputs
+	    ocl_error = clEnqueueWriteBuffer(ocl_info.queue, src_J_p, CL_FALSE, 0, J_p_size, p, 0, NULL, NULL);
+	    assert(ocl_error == CL_SUCCESS);
+
+	    ocl_error = clEnqueueWriteBuffer(ocl_info.queue, src_J_val, CL_FALSE, 0, J_val_size, idxij.val, 0, NULL, NULL);
+	    assert(ocl_error == CL_SUCCESS);
+
+	    ocl_error = clEnqueueWriteBuffer(ocl_info.queue, src_J_colidx, CL_FALSE, 0, J_colidx_size, idxij.colidx, 0, NULL, NULL);
+	    assert(ocl_error == CL_SUCCESS);
+
+	    ocl_error = clEnqueueWriteBuffer(ocl_info.queue, src_J_rowptr, CL_FALSE, 0, J_rowptr_size, idxij.rowptr, 0, NULL, NULL);
+	    assert(ocl_error == CL_SUCCESS);
+
+	    ocl_error = clEnqueueWriteBuffer(ocl_info.queue, src_J_last_Rs, CL_FALSE, 0, J_last_Rs_size, global_last_Rs, 0, NULL, NULL);
+	    assert(ocl_error == CL_SUCCESS);
+
+	    ocl_error = clEnqueueWriteBuffer(ocl_info.queue, src_J_last_ws, CL_FALSE, 0, J_last_ws_size, global_last_ws, 0, NULL, NULL);
+	    assert(ocl_error == CL_SUCCESS);
+
+	    ocl_error = clEnqueueWriteBuffer(ocl_info.queue, src_J_init_p, CL_FALSE, 0, J_init_p_size, ((sfm_global_t *)(((struct wrap_motstr_data_ *)jac_adata)->adata))->init_params, 0, NULL, NULL);
+	    assert(ocl_error == CL_SUCCESS);
+
 
 	    //Assign memory buffers to  
 	    ocl_error |= clSetKernelArg(ocl_info.kernel[1], 0, sizeof(cl_mem), &src_J_p);
@@ -989,9 +1010,36 @@ int sba_motstr_levmar_x(
 	    assert(ocl_error == CL_SUCCESS);
 	    clWaitForEvents(1, &kernel_event);
 	    printf("Done calling the kernel\n");
+
+		    
+	    //Read the buffer1
+	    ocl_error = clEnqueueReadBuffer(ocl_info.queue, src_J_Jac, CL_TRUE, 0, J_Jac_size, jac, 0, NULL, NULL);
+	    assert(ocl_error == CL_SUCCESS);
+
+	    ocl_error = clEnqueueReadBuffer(ocl_info.queue, src_J_last_Rs, CL_TRUE, 0, J_last_Rs_size, global_last_Rs, 0, NULL, NULL);
+	    assert(ocl_error == CL_SUCCESS);
+
+	    ocl_error = clEnqueueReadBuffer(ocl_info.queue, src_J_last_ws, CL_TRUE, 0, J_last_ws_size, global_last_ws, 0, NULL, NULL);
+	    assert(ocl_error == CL_SUCCESS);
+
+	    //Free memories
+	    clReleaseMemObject(src_J_p);
+	    clReleaseMemObject(src_J_val);
+	    clReleaseMemObject(src_J_colidx);
+	    clReleaseMemObject(src_J_rowptr);
+	    clReleaseMemObject(src_J_last_Rs);
+	    clReleaseMemObject(src_J_last_ws);
+	    clReleaseMemObject(src_J_Jac);
+	    clReleaseMemObject(src_J_init_p);
+
 	} else {
             (*fjac)(p, &idxij, rcidxs, rcsubs, jac, jac_adata); ++njev;
 	}
+	//int iiii;
+	//for (iiii = 0; iiii < nvis*ABsz; iiii++){
+		//printf("[sba_motstr_levmar_x] Printing Jac[%d]%f\n", iiii, jac[iiii]);
+	//}
+	//exit(0);
 	
 
 #ifdef TIMINGS
