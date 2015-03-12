@@ -762,10 +762,6 @@ int sba_motstr_levmar_x(
     {
 	    check3 = (double *)malloc(E_size);
 
-	    src_rcsubs = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE, rcsubs_size, NULL, &ocl_error);
-
-	    src_rcidxs = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE, rcidxs_size, NULL, &ocl_error);
-
 	    src_Yj = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE, Yj_size, NULL, &ocl_error);
 
 	    src_S = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE, S_size, NULL, &ocl_error);
@@ -779,9 +775,7 @@ int sba_motstr_levmar_x(
 	    src_W = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY|CL_MEM_USE_HOST_PTR, W_size, W, &ocl_error);
 
 	    src_U = clCreateBuffer(ocl_info.context, CL_MEM_READ_ONLY|CL_MEM_USE_HOST_PTR, U_size, U, &ocl_error);
-		    
-	    src_Ywt = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE, Ywt_size, NULL, &ocl_error);
-		    
+		    		    
 	    src_E = clCreateBuffer(ocl_info.context, CL_MEM_READ_WRITE|CL_MEM_USE_HOST_PTR, E_size, check3, &ocl_error);		    
     }
 
@@ -1382,11 +1376,9 @@ int sba_motstr_levmar_x(
 		    ocl_error = clEnqueueWriteBuffer(ocl_info.queue, src_eab, CL_FALSE, 0, eab_size, eab, 0, NULL, NULL);
 		    assert(ocl_error == CL_SUCCESS);
 
-		    ocl_error = clEnqueueFillBuffer(ocl_info.queue, src_E, &pattern, sizeof(double), 0, E_size, 0, NULL, NULL);//ocl_error = clEnqueueWriteBuffer(ocl_info.queue, src_E, CL_FALSE, 0, E_size, check3, 0, NULL, NULL);
+		    ocl_error = clEnqueueFillBuffer(ocl_info.queue, src_E, &pattern, sizeof(double), 0, E_size, 0, NULL, NULL);
 		    assert(ocl_error == CL_SUCCESS);
 			      
-		    ocl_error = clEnqueueFillBuffer(ocl_info.queue, src_Ywt, &pattern, sizeof(double), 0, Ywt_size, 0, NULL, NULL);//ocl_error = clEnqueueWriteBuffer(ocl_info.queue, src_Ywt, CL_FALSE, 0, Ywt_size, check1, 0, NULL, NULL);
-		    assert(ocl_error == CL_SUCCESS);
 
 #ifdef TIMINGS		
 		    clock_t temp_end = clock();
@@ -1397,8 +1389,8 @@ int sba_motstr_levmar_x(
 #ifdef TIMINGS
 		    temp_start = clock();		
 #endif
-		    ocl_error = clSetKernelArg(ocl_info.kernel[0], 0, sizeof(cl_mem), &src_rcsubs);
-		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 1, sizeof(cl_mem), &src_rcidxs);
+		    ocl_error = clSetKernelArg(ocl_info.kernel[0], 0, maxCPvis*sizeof(int), NULL); //rcsubs
+		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 1, maxCPvis*sizeof(int), NULL); // rcidxs
 		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 2, sizeof(cl_mem), &src_val);
 		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 3, sizeof(int), &nvis);
 		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 4, sizeof(int), &maxCPvis);
@@ -1407,13 +1399,12 @@ int sba_motstr_levmar_x(
 		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 7, sizeof(cl_mem), &src_V);
 		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 8, sizeof(cl_mem), &src_Yj);
 		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 9, sizeof(cl_mem), &src_W);
-		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 10, sizeof(cl_mem), &src_Ywt);
-		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 11, sizeof(cl_mem), &src_S);
-		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 12, sizeof(int), &mmconxUsz);
-		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 13, sizeof(cl_mem), &src_U);
-		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 14, sizeof(int), &Sdim);
-		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 15, sizeof(cl_mem), &src_E);
-		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 16, sizeof(cl_mem), &src_eab);
+		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 10, sizeof(cl_mem), &src_S);
+		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 11, sizeof(int), &mmconxUsz);
+		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 12, sizeof(cl_mem), &src_U);
+		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 13, sizeof(int), &Sdim);
+		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 14, sizeof(cl_mem), &src_E);
+		    ocl_error |= clSetKernelArg(ocl_info.kernel[0], 15, sizeof(cl_mem), &src_eab);
 
 		    assert(ocl_error == CL_SUCCESS);
 #ifdef TIMINGS		
@@ -2297,10 +2288,7 @@ int sba_motstr_levmar_x(
 	    clReleaseMemObject(src_W);
 	    clReleaseMemObject(src_U);
 	    clReleaseMemObject(src_eab);
-	    clReleaseMemObject(src_Ywt);
-	    clReleaseMemObject(src_E);
-	    clReleaseMemObject(src_rcsubs);
-	    clReleaseMemObject(src_rcidxs);    
+	    clReleaseMemObject(src_E); 
 	    clReleaseMemObject(src_Yj);
 	    clReleaseMemObject(src_S);
 
