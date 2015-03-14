@@ -62,7 +62,11 @@ int main(int argc, char **argv) {
     printf("[KeyMatchFull] Reading keys took %0.3fs\n",  (end - start) / ((double) CLOCKS_PER_SEC));
 
     start = clock();
-    std::vector<KEY_MATCH_RESULT> match_results =  KEY_MATCHER::match_keys_v2(keys, num_keys);
+    KEY_MATCH_PARAMS match_params = KEY_MATCH_PARAMS();
+    match_params.search_ratio(1.0);
+
+    std::vector<KEY_MATCH_RESULT> match_results =  KEY_MATCHER::match_keys_v2(keys, num_keys, match_params);
+
     end = clock();
     printf("[KeyMatchFull] Matching keys took %0.3fs\n",  (end - start) / ((double) CLOCKS_PER_SEC));
     // dump the results
