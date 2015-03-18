@@ -265,17 +265,19 @@ int SEJ(int mmconxUsz, int Sdim, int m, int maxPvis, int maxCPvis, double *V, do
 	int i;
 	for(i = 0; i < BUFFER_SIZE; i++)
 		buf[i] = -1;
-
-//	if(m > NR_THREADS)
-//	{
+	int num_t = NR_THREADS;
+	if(m > NR_THREADS)
+	{
 		for(i = 0; i < NR_THREADS; i++)
 			pthread_create(&thread[i],NULL, &stub, &val);
-/*	}
+	}
 	else
 	{
 		for(i = 0; i < m; i++)
 			pthread_create(&thread[i],NULL, &stub, &val);
-	}*/
+		bcast = m;
+		num_t = m;
+	}
 	while(count < m)
 	{
 		pthread_mutex_lock(&lock);		
@@ -294,7 +296,7 @@ int SEJ(int mmconxUsz, int Sdim, int m, int maxPvis, int maxCPvis, double *V, do
 		pthread_cond_wait(&done, &lock);
 	pthread_mutex_unlock(&lock);
 	printf("[sba_threaded] joining threads\n");
-	for(i = 0; i < NR_THREADS; i++)
+	for(i = 0; i < num_t; i++)
 		pthread_join(thread[i], NULL);
 	free(buf);
 	pthread_mutex_destroy(&lock);
