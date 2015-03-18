@@ -9,8 +9,8 @@ INCLUDE_FLAGS=-I../matrix -I../../include -I ../sfm-driver
 
 #OPTFLAGS=-O3
 
-OBJS=sba_levmar.o sba_levmar_wrap.o sba_lapack.o sba_crsm.o sba_chkjac.o sba_opencl.o
-SRCS=sba_levmar.c sba_levmar_wrap.c sba_lapack.c sba_crsm.c sba_chkjac.c sba_opencl.c
+OBJS=sba_levmar.o sba_levmar_wrap.o sba_lapack.o sba_crsm.o sba_chkjac.o sba_opencl.o sba_threaded.o
+SRCS=sba_levmar.c sba_levmar_wrap.c sba_lapack.c sba_crsm.c sba_chkjac.c sba_opencl.c sba_threaded.c
 AR=ar
 RANLIB=ranlib
 MAKE=make
@@ -19,7 +19,7 @@ LIB_PATH=-lOpenCL
 
 LIB=libsba.v1.5.a
 
-CFLAGS=-Wall $(OPTFLAGS) $(INCLUDE_FLAGS) $(LIB_PATH)
+CFLAGS=-Wall $(OPTFLAGS) $(INCLUDE_FLAGS) $(LIB_PATH) -lpthread
 
 all: $(LIB)
 
@@ -34,6 +34,7 @@ sba_lapack.o: sba.h compiler.h
 sba_crsm.o: sba.h
 sba_chkjac.o: sba.h sba_chkjac.h compiler.h
 sba_opencl.o: sba_opencl.h
+sba_threaded.o: sba.h
 
 clean:
 	@rm -f *.o

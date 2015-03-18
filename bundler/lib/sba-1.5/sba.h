@@ -176,6 +176,7 @@ extern int sba_crsm_row_elmidxs(struct sba_crsm *sm, int i, int *vidxs, int *jid
 extern int sba_crsm_col_elmidxs(struct sba_crsm *sm, int j, int *vidxs, int *iidxs);
 extern int sba_crsm_col_elmidxs_linear(struct sba_crsm *sm, int j, int *vidxs, int *iidxs);
 extern int sba_crsm_elmidx_linear(struct sba_crsm *sm, int i, int j);
+extern int SEJ(int mmconxUsz, int Sdim, int m, int maxPvis, int maxCPvis, double *V, double *W, double *E, double *ea, double *eb, double *S, double *U, struct sba_crsm *idxij);
 /* extern int sba_crsm_common_row(struct sba_crsm *sm, int j, int k); */
 
 #ifdef __cplusplus

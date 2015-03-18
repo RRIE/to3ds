@@ -75,18 +75,6 @@ void BundlerApp::BundleAdjustFast()
     v3_t *colors = new v3_t[max_pts];
     std::vector<ImageKeyVector> pt_views;
 
-#if 0
-    if (use_constraints) {
-	/* Constrain only the z-coordinate */
-	char constrained[7] = { 0, 1, 1, 0, 0, 0, 0 };
-	double constraints[7] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
-	for (int i = 0; i < num_images; i++) {
-	    memcpy(cameras[i].constrained, constrained, 7);
-	    memcpy(cameras[i].constraints, constraints, 7 * sizeof(double));
-	}
-    }
-#endif
-
     // int good_pair_1 = -1;
     // int good_pair_2 = -1;
 
@@ -101,7 +89,9 @@ void BundlerApp::BundleAdjustFast()
     int curr_num_cameras, curr_num_pts;
     int pt_count;
 
-#define OPENCL
+//#define OPENCL
+
+    struct opencl_info ocl_info; 
 
 #ifdef OPENCL
     struct opencl_info ocl_info = sba_opencl_setup();
@@ -217,18 +207,6 @@ void BundlerApp::BundleAdjustFast()
 	    double error1;
 	    error1 = RunSFM(curr_num_pts, 2, 0, false,
 			    cameras, points, added_order, colors, pt_views, &ocl_info);
-
-#if 0
-	    if (error0 < error1) {
-		/* Swap back */
-		printf("Restoring pre-Necker configuration\n");
-
-		memcpy(points, points_old, sizeof(v3_t) * curr_num_pts);
-		memcpy(cameras, cameras_old, sizeof(camera_params_t) * 2);
-	    }
-
-	    delete [] points_old;
-#endif
 	}
 
 	DumpPointsToPly(m_output_directory, "points001.ply", 
@@ -239,40 +217,10 @@ void BundlerApp::BundleAdjustFast()
 	    sprintf(buf, "%s%03d.out", m_bundle_output_base, 1);
 	    DumpOutputFile(m_output_directory, buf, num_images, 2, curr_num_pts,
 			   added_order, cameras, points, colors, pt_views);
-
-#if 0
-            if (m_estimate_distortion) {
-                sprintf(buf, "%s%03d.rd.out", m_bundle_output_base, 1);
-                DumpOutputFile(m_output_directory, buf, 
-                               num_images, 2, curr_num_pts,
-                               added_order, cameras, points, colors, pt_views,
-                               true);
-            }
-#endif
 	}
 
 	curr_num_cameras = 2;
     } else {
-#if 0
-	if (m_initial_pair[0] == -1 || m_initial_pair[1] == -1) {
-	    printf("[BundleAdjust] Error: initial good pair "
-		   "not provided!\n");
-	    printf("[BundleAdjust] Please specify a pair of "
-		   "cameras with medium baseline using\n"
-		   "  --init_pair1 <img1> and --init_pair2 <img2>\n");
-	    exit(1);
-	}
-    
-	good_pair_1 = added_order_inv[m_initial_pair[0]];
-	good_pair_2 = added_order_inv[m_initial_pair[1]];
-
-	if (good_pair_1 == -1 || good_pair_2 == -1) {
-	    printf("[BundleAdjust] Error: initial pair haven't "
-		   "been adjusted!\n");
-	    printf("[BundleAdjust] Please specify another pair!\n");
-	    exit(0);
-	}
-#endif
 
 	curr_num_cameras = num_init_cams;
 	pt_count = curr_num_pts = (int) m_point_data.size();
@@ -367,15 +315,6 @@ void BundlerApp::BundleAdjustFast()
 	printf("[BundleAdjust] Adding new matches\n");
 
 	pt_count = curr_num_pts;
-#if 0
-	for (int i = 0; i < num_added_images; i++) {
-	    pt_count = 
-		BundleAdjustAddNewPoints(curr_num_cameras + i, 
-					 pt_count, curr_num_cameras + i,
-					 added_order, cameras, points, colors,
-					 dist0, pt_views);
-	}
-#endif
 	
 	curr_num_cameras += image_count;
 
@@ -423,19 +362,6 @@ void BundlerApp::BundleAdjustFast()
             fflush(stdout);
         }
 
-#if 0
-	printf("  extrinsics:\n");
-	for (int i = 0; i < curr_num_cameras; i++) {
-	    printf("   [%03d] %0.3f %0.3f %0.3f\n"
-		   "         %0.3f %0.3f %0.3f\n"
-		   "         %0.3f %0.3f %0.3f\n", i,
-		   cameras[i].R[0], cameras[i].R[1], cameras[i].R[2],
-		   cameras[i].R[3], cameras[i].R[4], cameras[i].R[5],
-		   cameras[i].R[6], cameras[i].R[7], cameras[i].R[8]);
-	    printf("         %0.3f %0.3f %0.3f\n", 
-		   cameras[i].t[0], cameras[i].t[1], cameras[i].t[2]);
-	}
-#endif
 	
 	/* Dump output for this round */
 	char buf[256];
@@ -516,15 +442,11 @@ void BundlerApp::BundleAdjustFast()
 	pdata.m_color[1] = (float) Vy(colors[i]);
 	pdata.m_color[2] = (float) Vz(colors[i]);
 
-#if 1
 	for (int j = 0; j < (int) pt_views[i].size(); j++) {
 	    int v = pt_views[i][j].first;
 	    int vnew = added_order[v];
 	    pdata.m_views.push_back(ImageKey(vnew, pt_views[i][j].second));
 	}
-#else
-	pdata.m_views = pt_views[i];
-#endif
 
 	m_point_data.push_back(pdata);
     }

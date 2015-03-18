@@ -54,7 +54,8 @@
 #define TIMINGS
 #define OPENCL
 #define OPENCL_THRESHOLD 1000
-#define OPENCL_THRESHOLD_JAC 0
+#define OPENCL_THRESHOLD_JAC 1000
+#define THREADING 1
 
 #ifdef TIMINGS
 #include <time.h>
@@ -1339,8 +1340,25 @@ int sba_motstr_levmar_x(
                    (end - start) / (float) CLOCKS_PER_SEC);
 #endif
 
+	    if(THREADING)
+	    {
+		    _dblzero(E, m*easz);
+		    _dblzero(S, m*m*Sblsz);
+		    int mmconxUsz=mmcon*Usz;
+		    int t_error = SEJ(mmconxUsz, Sdim, m, maxPvis, maxCPvis, V, W, E, ea, eb, S, U, &idxij);
+		    for(j = 0; j < m; ++j)
+		    {
+		    	for(k=mcon; k<j; ++k){
+			    ptr1=S + (k-mcon)*mmconxUsz + (j-mcon)*cnp; // set ptr1 to point to the beginning of block j,k in S
+			    ptr2=S + (j-mcon)*mmconxUsz + (k-mcon)*cnp; // set ptr2 to point to the beginning of block k,j in S
+			    for(ii=0; ii<cnp; ++ii, ptr1+=Sdim)
+				for(jj=0, ptr3=ptr2+ii; jj<cnp; ++jj, ptr3+=Sdim)
+				    ptr1[jj]=*ptr3;
+			}
+		    }
 
-	    if(m > OPENCL_THRESHOLD)
+	    }
+	    else if(m > OPENCL_THRESHOLD)
 	    {
 		    _dblzero(E, m*easz); /* clear all e_j */
 		    /* compute the mmcon x mmcon block matrix S and e_j */
@@ -1479,7 +1497,6 @@ int sba_motstr_levmar_x(
 
 		    for(j=mcon; j<m; ++j){
 			int mmconxUsz=mmcon*Usz;
-
 			nnz=sba_crsm_col_elmidxs(&idxij, j, rcidxs, rcsubs); /* find nonzero Y_ij, i=0...n-1 */
 
 			/* compute all Y_ij = W_ij (V*_i)^-1 for a *fixed* j.

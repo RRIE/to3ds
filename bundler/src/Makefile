@@ -46,7 +46,7 @@ BUNDLER_OBJS=BaseApp.o BundlerApp.o keys.o Register.o Epipolar.o	\
 
 BUNDLER_BASE_LIBS=-limage -lsfmdrv -lsba.v1.5 -lmatrix -lz -llapack -lblas \
 	-lcblas -lminpack -lm -l5point -ljpeg -lANN_char -lgfortran -ltbb  \
-	-lOpenCL
+	-lOpenCL -lpthread
 CERES_LIBS=-lceres -lcholmod -lccolamd -lcolamd -lamd -lcamd -lcxsparse \
 	-lsuitesparseconfig -lgomp -lglog -lpthread
 
@@ -69,7 +69,7 @@ CPPFLAGS=$(OPTFLAGS) $(OTHERFLAGS) $(INCLUDE_PATH)
 
 all: $(BUNDLER) $(KEYMATCHFULL) $(KEYMATCHFAST) $(BUNDLE2PLY) $(BUNDLE2PMVS) $(BUNDLE2VIS) $(RADIALUNDISTORT) $(OPENCLTEST)
 
-%.o : %.cpp %.h
+%.o : %.cpp 
 	$(CXX) -c -o $@ $(CPPFLAGS) $(WXFLAGS) $(BUNDLER_DEFINES) $<
 
 $(BUNDLER): $(BUNDLER_OBJS)
