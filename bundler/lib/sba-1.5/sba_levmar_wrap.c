@@ -174,7 +174,7 @@ static struct sba_motstr_Qs_fdjac_data {
 	int max_m;
 } jac_data;
 
-static void sba_motstr_Qs_fdjac_compute_for_m(int my_m) {
+static inline void sba_motstr_Qs_fdjac_compute_for_m(int my_m) {
   
     int i, j, ii, jj;
     double d, d1, tmp;
@@ -277,22 +277,17 @@ static void sba_motstr_Qs_fdjac_compute_for_m(int my_m) {
     }
 }
 
-#define WORK_PER_THREAD 8
-#define THREAD_MAX_JAC 4	
+#define THREAD_MAX_JAC 8	
 static void sba_motstr_Qs_fdjac_thread (void* not_used) {
 	while (1) {
 		pthread_mutex_lock(&(jac_data.lock));
-		int my_m=jac_data.next_m;
-		jac_data.next_m+=WORK_PER_THREAD;
+		int my_m=jac_data.next_m++;
 		pthread_mutex_unlock(&(jac_data.lock));
 
-		int i;
-		for(i=0; i<WORK_PER_THREAD; i++, my_m++){
-			if (my_m>=jac_data.max_m)
-				return;
+		if (my_m>=jac_data.max_m)
+			return;
 
-			else sba_motstr_Qs_fdjac_compute_for_m(my_m);
-		}
+		else sba_motstr_Qs_fdjac_compute_for_m(my_m);
 	}
 }
 
@@ -324,11 +319,11 @@ static void sba_motstr_Qs_fdjac(
   //Create the threads
   pthread_t THREADS[m];
   int i;
-  for (i=0; i<THREAD_MAX_JAC&&i<=(m/WORK_PER_THREAD); i++) 
+  for (i=0; i<THREAD_MAX_JAC&&i<m; i++) 
 	pthread_create(&THREADS[i],NULL, &sba_motstr_Qs_fdjac_thread, i);
 
   //Wait for the threads
-  for (i=0; i<THREAD_MAX_JAC&&i<=(m/WORK_PER_THREAD); i++)
+  for (i=0; i<THREAD_MAX_JAC&&i<m; i++)
 	pthread_join(THREADS[i],NULL);
 
   pthread_mutex_destroy(&jac_data.lock);
