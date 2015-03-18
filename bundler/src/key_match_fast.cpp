@@ -63,8 +63,8 @@ int main(int argc, char **argv) {
 
     start = clock();
     KEY_MATCH_PARAMS match_params = KEY_MATCH_PARAMS();
-    match_params.search_ratio(1.0);
-
+    match_params.search_ratio(0.5);
+    match_params.flann_checks(12);
     std::vector<KEY_MATCH_RESULT> match_results =  KEY_MATCHER::match_keys_v2(keys, num_keys, match_params);
 
     end = clock();
