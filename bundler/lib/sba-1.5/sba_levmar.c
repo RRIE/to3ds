@@ -142,7 +142,7 @@ static double sba_mean_repr_error(int n, int mnp, double *x, double *hx, struct 
         printf("\n\n\n# X Y Z  nframes  frame0 x0 y0  frame1 x1 y1 ...\n");
         for(i=0; i<n; ++i){
             ptr=p+cnp*m+i*pnp;
-            for(ii=0; ii<pnp; ++ii) // print 3D coordinates
+            for(ii=0; ii<pnp; ++ii) /http://www.reddit.com/r/UofT/comments/2zuzlp/why_would_ece_or_similar_engineer_tas_vote_yes_to// print 3D coordinates
                 printf("%g ", ptr[ii]);
 
             nnz=sba_crsm_row_elmidxs(idxij, i, rcidxs, rcsubs); // find nonzero x_ij, j=0...m-1 
@@ -1027,15 +1027,12 @@ int sba_motstr_levmar_x(
 	    clReleaseMemObject(src_J_Jac);
 	    clReleaseMemObject(src_J_init_p);
 
-	} else {
-            (*fjac)(p, &idxij, rcidxs, rcsubs, jac, jac_adata); ++njev;
-	}
-	//int iiii;
-	//for (iiii = 0; iiii < nvis*ABsz; iiii++){
-		//printf("[sba_motstr_levmar_x] Printing Jac[%d]%f\n", iiii, jac[iiii]);
-	//}
-	//exit(0);
-	
+	} else if(THREADING)
+	{
+	    jac_threaded(p, &idxij, maxCPvis, jac, jac_adata); ++njev;
+       	}
+	else
+		(*fjac)(p, &idxij, rcidxs, rcsubs, jac, jac_adata); ++njev;	
 
 #ifdef TIMINGS
         end = clock();

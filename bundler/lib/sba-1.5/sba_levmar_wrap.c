@@ -160,137 +160,6 @@ static void sba_motstr_Qs_jac(double *p, struct sba_crsm *idxij, int *rcidxs, in
 /* This is the default jacobian function that is used in sba_motstr_levmar_x to compute the derivatives */
 
 #define JAC_DEBUG 0
-
-static struct sba_motstr_Qs_fdjac_data {
-	double *p, *jac;
-
-	struct sba_crsm *idxij;
-	struct wrap_motstr_data_ *fdjd;
-  	void (*proj)(int j, int i, double *aj, double *bi, double *xij, void *adata);
-
-  	pthread_mutex_t lock;
-	int next_m;
-	int page_buffer[8];
-	int max_m;
-} jac_data;
-
-static inline void sba_motstr_Qs_fdjac_compute_for_m(int my_m) {
-  
-    int i, j, ii, jj;
-    double d, d1, tmp;
-    double *pAB;
-
-    int n, m;
-    n=jac_data.idxij->nr; m=jac_data.idxij->nc;
-
-    int cnp, pnp, mnp;
-    cnp=jac_data.fdjd->cnp; pnp=jac_data.fdjd->pnp; mnp=jac_data.fdjd->mnp;
-    
-    int Asz, Bsz, ABsz;
-    Asz=mnp*cnp; Bsz=mnp*pnp; ABsz=Asz+Bsz;
-
-    double *pa, *pb, *paj, *pbi;
-    pa=jac_data.p; pb=jac_data.p+m*cnp;
-  
-    void *adata=jac_data.fdjd->adata;
-    
-    double hxij[2*mnp];
-    double *hxxij=hxij+mnp;
-    if (JAC_DEBUG) printf("[sba_motstr_Qs_fdjac]Started with %m\n", my_m);
-
-    /* compute A_ij */
-    j=my_m;
-    paj=pa+j*cnp; // j-th camera parameters
-
-    for(jj=0; jj<cnp; ++jj){
-    /* determine d=max(SBA_DELTA_SCALE*|paj[jj]|, SBA_MIN_DELTA), see HZ */
-        d=(double)(SBA_DELTA_SCALE)*paj[jj]; // force evaluation
-        d=FABS(d);
-        if(d<SBA_MIN_DELTA) d=SBA_MIN_DELTA;
-        d1=1.0/d; /* invert so that divisions can be carried out faster as multiplications */
- 	
-	if (JAC_DEBUG) printf("[sba_motstr_Qs_fdjac[%d]]Started\n", my_m);
-
-	int low, high, diff, mid;
-	for (i=0; i<n; ++i){
-            if (JAC_DEBUG) printf("[sba_motstr_Qs_fdjac[%d]]Doing %d\n", my_m, i);
-	   
-	    //Do binary search tree to get the columns we want
-	    low = jac_data.idxij->rowptr[i];
-	    high = jac_data.idxij->rowptr[i+1] - 1;
-   	    while(low<=high){
-		mid=(low+high)>>1; //(low+high)/2;
-		diff=j - jac_data.idxij->colidx[mid];
-                if (JAC_DEBUG) printf("[sba_motstr_Qs_fdjac[%d]]diff is %d\n", my_m, diff);
-      		if(diff<0)
-        	    high=mid-1;
-      		else if(diff>0)
-        	    low=mid+1;
-      		else { /* found */
-
-          		pbi=pb + i*pnp; // i-th point parameters
-	  		if (JAC_DEBUG) printf("[sba_motstr_Qs_fdjac] will be calling proj for calculating A_ij, with %d, %d, %f, %f\n", j, i, *paj, *pbi);	
-          		(*(jac_data.proj))(j, i, paj, pbi, hxij, adata); // evaluate supplied function on current solution
-
-          		tmp=paj[jj];
-          		paj[jj]+=d;
-          		(*(jac_data.proj))(j, i, paj, pbi, hxxij, adata);
-          		paj[jj]=tmp; /* restore */
-
-          		pAB=jac_data.jac + jac_data.idxij->val[mid]*ABsz; // set pAB to point to A_ij
-          		for(ii=0; ii<mnp; ++ii) {
-            			pAB[ii*cnp+jj]=(hxxij[ii]-hxij[ii])*d1;
-            			//if (JAC_DEBUG) printf("[sba_motstr_Qs_fdjac] wrote Jac[%d] = %f, d1 = %f\n", idxij->val[rcidxs[i]]*ABsz + ii*cnp+jj, (hxxij[ii]-hxij[ii])*d1, d1);
-	  		}
-			break;
-		}
-            }
-        }
-    }
-    /* compute B_ij */
-    for(i=0; i<n; ++i){
-      pbi=pb+i*pnp; // i-th point parameters
-
-      for(jj=0; jj<pnp; ++jj){
-        /* determine d=max(SBA_DELTA_SCALE*|pbi[jj]|, SBA_MIN_DELTA), see HZ */
-        d=(double)(SBA_DELTA_SCALE)*pbi[jj]; // force evaluation
-        d=FABS(d);
-        if(d<SBA_MIN_DELTA) d=SBA_MIN_DELTA;
-        d1=1.0/d; /* invert so that divisions can be carried out faster as multiplications */
-
-	for(j=jac_data.idxij->rowptr[i]; j < jac_data.idxij->rowptr[i+1]; ++j) {
-	  if (jac_data.idxij->colidx[j]==my_m) {
-          	paj=pa + my_m*cnp; // j-th camera parameters
-          	(*(jac_data.proj))(my_m, i, paj, pbi, hxij, adata); // evaluate supplied function on current solution
-
-          	tmp=pbi[jj];
-          	pbi[jj]+=d;
-          	(*(jac_data.proj))(my_m, i, paj, pbi, hxxij, adata);
-          	pbi[jj]=tmp; /* restore */
-
-          	pAB=jac_data.jac + jac_data.idxij->val[j]*ABsz + Asz; // set pAB to point to B_ij
-          	for(ii=0; ii<mnp; ++ii)
-            		pAB[ii*pnp+jj]=(hxxij[ii]-hxij[ii])*d1;
-	  }
-        }
-      }
-    }
-}
-
-#define THREAD_MAX_JAC 8	
-static void sba_motstr_Qs_fdjac_thread (void* not_used) {
-	while (1) {
-		pthread_mutex_lock(&(jac_data.lock));
-		int my_m=jac_data.next_m++;
-		pthread_mutex_unlock(&(jac_data.lock));
-
-		if (my_m>=jac_data.max_m)
-			return;
-
-		else sba_motstr_Qs_fdjac_compute_for_m(my_m);
-	}
-}
-
 static void sba_motstr_Qs_fdjac(
     double *p,                /* I: current parameter estimate, (m*cnp+n*pnp)x1 */
     struct sba_crsm *idxij,   /* I: sparse matrix containing the location of x_ij in hx */
@@ -299,34 +168,103 @@ static void sba_motstr_Qs_fdjac(
     double *jac,              /* O: array for storing the approximated jacobian */
     void   *dat)              /* I: points to a "wrap_motstr_data_" structure */
 {
+  register int i, j, ii, jj;
+  double *pa, *pb, *paj, *pbi;
+  register double *pAB;
+  int n, m, nnz, Asz, Bsz, ABsz;
+
+  double tmp;
+  register double d, d1;
+
+  struct wrap_motstr_data_ *fdjd;
+  void (*proj)(int j, int i, double *aj, double *bi, double *xij, void *adata, int tid);
+  double *hxij, *hxxij;
+  int cnp, pnp, mnp;
+  void *adata;
 
   /* retrieve problem-specific information passed in *dat */
-  jac_data.fdjd=(struct wrap_motstr_data_ *)dat;
-  jac_data.proj=((struct wrap_motstr_data_ *)dat)->proj;
-  jac_data.p=p;
-  jac_data.jac=jac;
-  jac_data.idxij=idxij;
+  fdjd=(struct wrap_motstr_data_ *)dat;
+  proj=fdjd->proj;
+  cnp=fdjd->cnp; pnp=fdjd->pnp; mnp=fdjd->mnp;
+  adata=fdjd->adata;
+
+  n=idxij->nr; m=idxij->nc;
+  pa=p; pb=p+m*cnp;
+  Asz=mnp*cnp; Bsz=mnp*pnp; ABsz=Asz+Bsz;
 
 
-  //Multi_thread the Jacobian calculations per camera
-  int m = idxij->nc;
-  if (JAC_DEBUG) printf("[sba_motstr_Qs_fdjac] Got call with %d\n", m);
+  printf("[sba_motstr_Qs_fdjac]cnp=%d, mnp=%d, pnp=%d\n", cnp, mnp, pnp);
 
-  pthread_mutex_init(&(jac_data.lock), NULL);
-  jac_data.max_m=m;
-  jac_data.next_m=0;
+  /* allocate memory for hxij, hxxij */
+  if((hxij=malloc(2*mnp*sizeof(double)))==NULL){
+    fprintf(stderr, "memory allocation request failed in sba_motstr_Qs_fdjac()!\n");
+    exit(1);
+  }
+  hxxij=hxij+mnp;
 
-  //Create the threads
-  pthread_t THREADS[m];
-  int i;
-  for (i=0; i<THREAD_MAX_JAC&&i<m; i++) 
-	pthread_create(&THREADS[i],NULL, &sba_motstr_Qs_fdjac_thread, i);
+    /* compute A_ij */
 
-  //Wait for the threads
-  for (i=0; i<THREAD_MAX_JAC&&i<m; i++)
-	pthread_join(THREADS[i],NULL);
+    for(j=0; j<m; ++j){
+      paj=pa+j*cnp; // j-th camera parameters
 
-  pthread_mutex_destroy(&jac_data.lock);
+      nnz=sba_crsm_col_elmidxs(idxij, j, rcidxs, rcsubs); /* find nonzero A_ij, i=0...n-1 */
+      for(jj=0; jj<cnp; ++jj){
+        /* determine d=max(SBA_DELTA_SCALE*|paj[jj]|, SBA_MIN_DELTA), see HZ */
+        d=(double)(SBA_DELTA_SCALE)*paj[jj]; // force evaluation
+        d=FABS(d);
+        if(d<SBA_MIN_DELTA) d=SBA_MIN_DELTA;
+        d1=1.0/d; /* invert so that divisions can be carried out faster as multiplications */
+
+        for(i=0; i<nnz; ++i){
+          pbi=pb + rcsubs[i]*pnp; // i-th point parameters
+	  if (JAC_DEBUG) printf("[sba_motstr_Qs_fdjac] sfm_project_point3 for calculating A_ij, with %d, %d, %f, %f\n", j, rcsubs[i], *paj, *pbi);	
+          (*proj)(j, rcsubs[i], paj, pbi, hxij, adata,0); // evaluate supplied function on current solution
+
+          tmp=paj[jj];
+          paj[jj]+=d;
+          (*proj)(j, rcsubs[i], paj, pbi, hxxij, adata,0);
+          paj[jj]=tmp; /* restore */
+
+          pAB=jac + idxij->val[rcidxs[i]]*ABsz; // set pAB to point to A_ij
+          for(ii=0; ii<mnp; ++ii) {
+            pAB[ii*cnp+jj]=(hxxij[ii]-hxij[ii])*d1;
+            if (JAC_DEBUG) printf("[sba_motstr_Qs_fdjac] wrote Jac[%d] = %f, d1 = %f\n", idxij->val[rcidxs[i]]*ABsz + ii*cnp+jj, (hxxij[ii]-hxij[ii])*d1, d1);
+	  }
+        }
+      }
+    }
+
+    /* compute B_ij */
+
+    for(i=0; i<n; ++i){
+      pbi=pb+i*pnp; // i-th point parameters
+
+      nnz=sba_crsm_row_elmidxs(idxij, i, rcidxs, rcsubs); /* find nonzero B_ij, j=0...m-1 */
+      for(jj=0; jj<pnp; ++jj){
+        /* determine d=max(SBA_DELTA_SCALE*|pbi[jj]|, SBA_MIN_DELTA), see HZ */
+        d=(double)(SBA_DELTA_SCALE)*pbi[jj]; // force evaluation
+        d=FABS(d);
+        if(d<SBA_MIN_DELTA) d=SBA_MIN_DELTA;
+        d1=1.0/d; /* invert so that divisions can be carried out faster as multiplications */
+
+        for(j=0; j<nnz; ++j){
+          paj=pa + rcsubs[j]*cnp; // j-th camera parameters
+          (*proj)(rcsubs[j], i, paj, pbi, hxij, adata,0); // evaluate supplied function on current solution
+
+          tmp=pbi[jj];
+          pbi[jj]+=d;
+          (*proj)(rcsubs[j], i, paj, pbi, hxxij, adata,0);
+          pbi[jj]=tmp; /* restore */
+
+          pAB=jac + idxij->val[rcidxs[j]]*ABsz + Asz; // set pAB to point to B_ij
+          for(ii=0; ii<mnp; ++ii)
+            pAB[ii*pnp+jj]=(hxxij[ii]-hxij[ii])*d1;
+        }
+      }
+    }
+
+
+  free(hxij);
 }
 
 /* BUNDLE ADJUSTMENT FOR CAMERA PARAMETERS ONLY */

@@ -4,18 +4,10 @@
 #include <pthread.h>
 #include <string.h>
 #include "sba.h"
-
+#include "sba_levmar.h"
 
 #define NR_THREADS 8
 #define BUFFER_SIZE 8
-
-pthread_cond_t notempty, notfull, done;
-pthread_mutex_t lock; 
-
-int num_requests = 0;
-int *buf = NULL;
-int count = 0;
-int bcast = NR_THREADS;
 
 #define cnp 9
 #define pnp 3
@@ -28,6 +20,9 @@ int bcast = NR_THREADS;
 #define ebsz 3
 #define YWtsz 81
 
+#define FABS(x)           (((x)>=0)? (x) : -(x))
+
+pthread_mutex_t *global_lock = NULL;
 
 struct threadParams
 {
@@ -36,6 +31,8 @@ struct threadParams
 	int m; 
 	int maxPvis;
 	int maxCPvis;
+	int beg;
+	int end;
 	double *V;
 	double *W;
 	double *E;
@@ -45,37 +42,6 @@ struct threadParams
 	double *U;
 	struct sba_crsm idxij;
 };
-
-int add_queue(int* queue, int max_length, int val)
-{
-	int i = 0;
-	for(i = 0; i < max_length; i++)
-	{
-		if(queue[i] == -1)
-		{
-			queue[i] = val;
-			return 0;
-		}
-	}
-	return -1;
-}
-
-int remove_queue(int * queue, int max_length, int val)
-{
-	int i = 0;
-	int j = 0;
-	for(i = 0; i < max_length; i++)
-	{
-		if(queue[i] == val)
-		{
-			for(j = i+1; j < max_length; j++)
-				queue[j-1] = queue [j];
-			queue[max_length-1] = -1;
-			return 0;
-		}
-	}
-	return -1;
-}
 
 void *stub(void *ptr)
 {
@@ -95,7 +61,7 @@ void *stub(void *ptr)
 	int maxCPvis = ((struct threadParams*)ptr)->maxCPvis;
 
 	double *Yj = (double *)malloc(sizeof(double)*maxPvis*Ysz);
-	double *YWt = (double *)malloc(sizeof(double)*YWtsz);
+	double YWt[81];
 	int *rcidxs = (int *)malloc(sizeof(int)*maxCPvis);
 	int *rcsubs = (int *)malloc(sizeof(int)*maxCPvis);
 	
@@ -107,25 +73,12 @@ void *stub(void *ptr)
 
 	double sum;
 	int nnz;
-	printf("[sba_threaded] in stub\n");
 
-	
-	while(1)
+	int beg = ((struct threadParams *)ptr)->beg;
+	int end = ((struct threadParams *)ptr)->end;
+
+	for(j = beg; j < end; j++)
 	{
-		pthread_mutex_lock(&lock);
-		while(num_requests == 0 && count < m)
-			pthread_cond_wait(&notempty, &lock);
-		if(count >= m && num_requests == 0)
-		{
-			pthread_mutex_unlock(&lock);
-			goto DONEWORK;
-		}
-		j = buf[0];
-		remove_queue(buf, BUFFER_SIZE, j);
-		num_requests--;
-		if(num_requests < BUFFER_SIZE)
-			pthread_cond_signal(&notfull);
-		pthread_mutex_unlock(&lock);
 
 		// need V, W, E, eab, S, mmconxUsz, Sdim
 		memset(Yj, 0.0, maxPvis*Ysz*sizeof(double));
@@ -227,13 +180,7 @@ void *stub(void *ptr)
 		for(i=0; i<easz; ++i)
 			ptr1[i]=ptr2[i] - ptr1[i];
 	}
-	DONEWORK: 
-	pthread_mutex_lock(&lock);
-	bcast--;
-	pthread_cond_signal(&done);
-	pthread_mutex_unlock(&lock);
 	free(Yj);
-	free(YWt);
 	free(rcidxs);
 	free(rcsubs);
 	return;
@@ -241,71 +188,294 @@ void *stub(void *ptr)
 
 int SEJ(int mmconxUsz, int Sdim, int m, int maxPvis, int maxCPvis, double *V, double *W, double *E, double *ea, double *eb, double *S, double *U, struct sba_crsm *idxij)
 {
-	buf = (int *)malloc(sizeof(int)*BUFFER_SIZE);
-	pthread_t *thread = (pthread_t *)malloc(sizeof(pthread_t)*NR_THREADS);
-	pthread_cond_init(&notempty, NULL);
-	pthread_cond_init(&notfull, NULL); 
-	pthread_cond_init(&done, NULL); 
-	pthread_mutex_init(&lock, NULL);
-
-	struct threadParams val; 
-	val.mmconxUsz = mmconxUsz;
-	val.Sdim = Sdim;
-	val.m = m; 
-	val.maxPvis = maxPvis;
-	val.maxCPvis = maxCPvis;
-	val.V = V;
-	val.W = W;
-	val.E = E;
-	val.ea = ea;
-	val.eb = eb;
-	val.S = S;
-	val.U = U;
-	val.idxij = *idxij;
+	
 	int i;
-	for(i = 0; i < BUFFER_SIZE; i++)
-		buf[i] = -1;
 	int num_t = NR_THREADS;
 	if(m > NR_THREADS)
-	{
-		for(i = 0; i < NR_THREADS; i++)
-			pthread_create(&thread[i],NULL, &stub, &val);
-	}
+		num_t = NR_THREADS;
 	else
-	{
-		for(i = 0; i < m; i++)
-			pthread_create(&thread[i],NULL, &stub, &val);
-		bcast = m;
 		num_t = m;
-	}
-	while(count < m)
+	
+	pthread_t thread[NR_THREADS];
+	struct threadParams val[NR_THREADS];
+
+	for(i = 0; i < num_t; i++)
 	{
-		pthread_mutex_lock(&lock);		
-		while(num_requests == BUFFER_SIZE)
-			pthread_cond_wait(&notfull, &lock);
-		add_queue(buf, BUFFER_SIZE, count);
-		count++;
-		num_requests++;
-		if(num_requests > 0)
-			pthread_cond_signal(&notempty);
-		pthread_mutex_unlock(&lock);
+		val[i].mmconxUsz = mmconxUsz;
+		val[i].Sdim = Sdim;
+		val[i].m = m; 
+		val[i].maxPvis = maxPvis;
+		val[i].maxCPvis = maxCPvis;
+		val[i].V = V;
+		val[i].W = W;
+		val[i].E = E;
+		val[i].ea = ea;
+		val[i].eb = eb;
+		val[i].S = S;
+		val[i].U = U;
+		val[i].idxij = *idxij;
+		val[i].beg = i*m/num_t;
+		val[i].end = (i+1)*m/num_t;
+		pthread_create(&thread[i], NULL, &stub, &(val[i]));
+
 	}
-	pthread_mutex_lock(&lock);
-	pthread_cond_broadcast(&notempty);
-	while(bcast != 0)
-		pthread_cond_wait(&done, &lock);
-	pthread_mutex_unlock(&lock);
-	printf("[sba_threaded] joining threads\n");
 	for(i = 0; i < num_t; i++)
 		pthread_join(thread[i], NULL);
-	free(buf);
-	pthread_mutex_destroy(&lock);
-	pthread_cond_destroy(&done);
-	pthread_cond_destroy(&notempty);
-	pthread_cond_destroy(&notfull);
-	buf = NULL;
-	num_requests = 0;
-	bcast = NR_THREADS;
-	count = 0;
+	return 0;
+}
+
+struct jac_threadParams
+{
+	int beg;
+	int end;
+	int maxCPvis;
+	int mnp;
+	int Asz;
+	int ABsz;
+	double *hxij;
+	double *pb;
+	double *pa;
+	double *jac;
+	int *rcsubs;
+	int *rcidxs;
+	struct sba_crsm *idxij;
+	void *proj;
+	void *adata;
+};
+
+void *stub_jac_AIJ(void *ptr)
+{
+	register int i, jj, j, ii;
+	int nnz;
+	double d, d1, tmp;
+	int maxCPvis = ((struct jac_threadParams*)ptr)->maxCPvis;
+
+	int *rcsubs = (int *)malloc(sizeof(int)*maxCPvis);
+	int *rcidxs = (int *)malloc(sizeof(int)*maxCPvis);
+
+	double *pbi, *paj;
+
+	double *hxij;
+	double *hxxij;
+	double *pb = ((struct jac_threadParams*)ptr)->pb;
+	double *pa = ((struct jac_threadParams*)ptr)->pa;
+	double *jac = ((struct jac_threadParams*)ptr)->jac;
+	double *pAB;
+	
+	int beg = ((struct jac_threadParams*)ptr)->beg;
+	int end = ((struct jac_threadParams*)ptr)->end;
+
+	void (*proj)(int j, int i, double *aj, double *bi, double *xij, void *adata);
+
+	proj = ((struct jac_threadParams*)ptr)->proj;
+
+	void *adata = ((struct jac_threadParams*)ptr)->adata;
+
+	struct sba_crsm *idxij = ((struct jac_threadParams*)ptr)->idxij;
+	
+	int mnp = ((struct jac_threadParams*)ptr)->mnp;
+
+	int ABsz = ((struct jac_threadParams*)ptr)->ABsz;
+	int Asz = ((struct jac_threadParams*)ptr)->Asz;
+	
+	if((hxij=malloc(2*mnp*sizeof(double)))==NULL){
+		fprintf(stderr, "memory allocation request failed in sba_motstr_Qs_fdjac()!\n");
+		exit(1);
+	}
+	hxxij=hxij+mnp;
+
+	/* compute A_ij */
+	for(j=beg; j<end; ++j){
+		paj=pa+j*cnp; // j-th camera parameters
+		printf("j is %d\n", j);
+		nnz=sba_crsm_col_elmidxs(idxij, j, rcidxs, rcsubs); /* find nonzero A_ij, i=0...n-1 */
+		for(jj=0; jj<cnp; ++jj){
+			d=(double)(SBA_DELTA_SCALE)*paj[jj]; // force evaluation
+			d=FABS(d);
+			if(d<SBA_MIN_DELTA) d=SBA_MIN_DELTA;
+			d1=1.0/d; /* invert so that divisions can be carried out faster as multiplications */
+
+			for(i=0; i<nnz; ++i){
+				pbi=pb + rcsubs[i]*pnp; // i-th point parameters
+				(*proj)(j, rcsubs[i], paj, pbi, hxij, adata); // evaluate supplied function on current solution
+
+				tmp=paj[jj];
+				paj[jj]+=d;
+				(*proj)(j, rcsubs[i], paj, pbi, hxxij, adata);
+				paj[jj]=tmp; /* restore */
+
+				pAB=jac + idxij->val[rcidxs[i]]*ABsz; // set pAB to point to A_ij
+				for(ii=0; ii<mnp; ++ii) {
+					pAB[ii*cnp+jj]=(hxxij[ii]-hxij[ii])*d1;
+				}
+			}
+		}
+	}
+	free(rcsubs);
+	free(rcidxs);
+	free(hxij);
+}
+
+void *stub_jac_BIJ(void *ptr)
+{
+	register int i, jj, j, ii;
+	int nnz;
+	double d, d1, tmp;
+	int maxCPvis = ((struct jac_threadParams*)ptr)->maxCPvis;
+
+	int *rcsubs = (int *)malloc(sizeof(int)*maxCPvis);
+	int *rcidxs = (int *)malloc(sizeof(int)*maxCPvis);
+
+	double *pbi, *paj;
+
+	double *hxij;
+	double *hxxij;
+	double *pb = ((struct jac_threadParams*)ptr)->pb;
+	double *pa = ((struct jac_threadParams*)ptr)->pa;
+	double *jac = ((struct jac_threadParams*)ptr)->jac;
+	double *pAB;
+	
+	int beg = ((struct jac_threadParams*)ptr)->beg;
+	int end = ((struct jac_threadParams*)ptr)->end;
+
+	void (*proj)(int j, int i, double *aj, double *bi, double *xij, void *adata);
+
+	proj = ((struct jac_threadParams*)ptr)->proj;
+
+	void *adata = ((struct jac_threadParams*)ptr)->adata;
+
+	struct sba_crsm *idxij = ((struct jac_threadParams*)ptr)->idxij;
+	
+	int mnp = ((struct jac_threadParams*)ptr)->mnp;
+
+	int ABsz = ((struct jac_threadParams*)ptr)->ABsz;
+	int Asz = ((struct jac_threadParams*)ptr)->Asz;
+	
+	if((hxij=malloc(2*mnp*sizeof(double)))==NULL){
+		fprintf(stderr, "memory allocation request failed in sba_motstr_Qs_fdjac()!\n");
+		exit(1);
+	}
+	hxxij=hxij+mnp;
+
+	/* compute B_ij */
+	for(i=beg; i<end; ++i)
+	{
+		pbi=pb+i*pnp; // i-th point parameters
+
+		nnz=sba_crsm_row_elmidxs(idxij, i, rcidxs, rcsubs); /* find nonzero B_ij, j=0...m-1 */
+		for(jj=0; jj<pnp; ++jj)
+		{
+			/* determine d=max(SBA_DELTA_SCALE*|pbi[jj]|, SBA_MIN_DELTA), see HZ */
+			d=(double)(SBA_DELTA_SCALE)*pbi[jj]; // force evaluation
+			d=FABS(d);
+			if(d<SBA_MIN_DELTA) d=SBA_MIN_DELTA;
+			d1=1.0/d; /* invert so that divisions can be carried out faster as multiplications */
+
+			for(j=0; j<nnz; ++j)
+			{
+				paj=pa + rcsubs[j]*cnp; // j-th camera parameters
+				pthread_mutex_lock(&(global_lock[rcsubs[j]]));
+				(*proj)(rcsubs[j], i, paj, pbi, hxij, adata); // evaluate supplied function on current solution
+				tmp=pbi[jj];
+				pbi[jj]+=d;
+				(*proj)(rcsubs[j], i, paj, pbi, hxxij, adata);
+				pthread_mutex_unlock(&(global_lock[rcsubs[j]]));
+				pbi[jj]=tmp; /* restore */
+				
+				pAB=jac + idxij->val[rcidxs[j]]*ABsz + Asz; // set pAB to point to B_ij
+				for(ii=0; ii<mnp; ++ii)
+					pAB[ii*pnp+jj]=(hxxij[ii]-hxij[ii])*d1;
+				}
+		}
+	}
+	free(rcsubs);
+	free(rcidxs);
+	free(hxij);
+}
+
+int jac_threaded(double *p, struct sba_crsm *idxij, int maxCPvis, double *jac, void *dat)
+{
+	register int i, j, ii, jj;
+	double *pa, *pb, *paj, *pbi;
+	register double *pAB;
+	int n, m, nnz, Asz, Bsz, ABsz;
+
+	double tmp;
+	register double d, d1;
+
+	struct wrap_motstr_data_ *fdjd;
+	void (*proj)(int j, int i, double *aj, double *bi, double *xij, void *adata);
+	int mnp;
+	void *adata;	
+
+	global_lock = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)*idxij->nc);
+
+	for(i = 0; i < idxij->nc; i++)
+		pthread_mutex_init(&(global_lock[i]),NULL);
+	
+	/* retrieve problem-specific information passed in *dat */
+	fdjd=(struct wrap_motstr_data_ *)dat;
+	proj=fdjd->proj;
+	mnp=fdjd->mnp;
+	adata=fdjd->adata;
+
+	n=idxij->nr; m=idxij->nc;
+	pa=p; pb=p+m*cnp;
+	Asz=mnp*cnp; Bsz=mnp*pnp; ABsz=Asz+Bsz;
+
+	int num_t = NR_THREADS;
+	if(m > NR_THREADS)
+		num_t = NR_THREADS;
+	else
+		num_t = m;
+	
+	pthread_t thread[NR_THREADS];
+	struct jac_threadParams val[NR_THREADS];
+	//num_t = 1;
+	for(i = 0; i < num_t; i++)
+	{
+		val[i].beg = i*m/num_t;
+		val[i].end = (i+1)*m/num_t;
+		val[i].idxij = idxij;
+		val[i].pa = pa;
+		val[i].pb = pb;
+		val[i].proj = proj;
+		val[i].maxCPvis = maxCPvis;
+		val[i].jac = jac; 
+		val[i].adata = adata;
+		val[i].mnp = mnp;
+		val[i].ABsz = ABsz;
+		val[i].Asz = Asz;
+		pthread_create(&thread[i], NULL, &stub_jac_AIJ, &(val[i]));
+	}
+	for(i = 0; i < num_t; i++)
+		pthread_join(thread[i], NULL);
+
+	if(n > NR_THREADS)
+		num_t = NR_THREADS;
+	else
+		num_t = n;
+	for(i = 0; i < num_t; i++)
+	{
+		val[i].beg = i*n/num_t;
+		val[i].end = (i+1)*n/num_t;
+		val[i].idxij = idxij;
+		val[i].pa = pa;
+		val[i].pb = pb;
+		val[i].proj = proj;
+		val[i].maxCPvis = maxCPvis;
+		val[i].jac = jac; 
+		val[i].adata = adata;
+		val[i].mnp = mnp;
+		val[i].ABsz = ABsz;
+		val[i].Asz = Asz;
+		pthread_create(&thread[i], NULL, &stub_jac_BIJ, &(val[i]));
+	}
+	for(i = 0; i < num_t; i++)
+		pthread_join(thread[i], NULL);
+	
+	for(i = 0; i < idxij->nc; i++)
+		pthread_mutex_destroy(&(global_lock[i]));
+	free(global_lock);
 	return 0;
 }
